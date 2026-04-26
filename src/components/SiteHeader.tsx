@@ -1,12 +1,12 @@
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 
-const navItems = [
+const navItems: { to: "/" | "/contact" | "/gallery" | "/rules"; label: string; exact?: boolean }[] = [
   { to: "/", label: "Home", exact: true },
   { to: "/contact", label: "Contact" },
   { to: "/gallery", label: "Gallery" },
   { to: "/rules", label: "Rules & Regulations" },
-] as const;
+];
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
