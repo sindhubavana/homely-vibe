@@ -4,7 +4,6 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Chatbot } from "@/components/Chatbot";
 import { AmenitiesSection } from "@/components/AmenitiesSection";
-import { InfoCards } from "@/components/InfoCards";
 import { blocks } from "@/data/blocks";
 import hero1 from "@/assets/hero-building.jpg";
 import hero2 from "@/assets/hero-building-2.jpg";
@@ -181,7 +180,6 @@ function Index() {
         </section>
 
         <AmenitiesSection />
-        <InfoCards />
       </main>
       <SiteFooter />
       <Chatbot />
