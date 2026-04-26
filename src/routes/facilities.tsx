@@ -1,14 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
-import food from "@/assets/amenity-food.jpg";
-import washing from "@/assets/amenity-washing.jpg";
-import hotwater from "@/assets/amenity-hotwater.jpg";
-import wifi from "@/assets/amenity-wifi.jpg";
-import power from "@/assets/amenity-power.jpg";
-import cctv from "@/assets/amenity-cctv.jpg";
-import cleaning from "@/assets/amenity-cleaning.jpg";
-import laundry from "@/assets/amenity-laundry.jpg";
+import dining from "@/assets/facility-dining.jpg";
+import food from "@/assets/facility-food.jpg";
+import washing from "@/assets/facility-washing.jpg";
+import hotwater from "@/assets/facility-hotwater.jpg";
+import wifi from "@/assets/facility-wifi.jpg";
+import power from "@/assets/facility-power.jpg";
+import cctv from "@/assets/facility-cctv.jpg";
+import study from "@/assets/facility-study.jpg";
 
 export const Route = createFileRoute("/facilities")({
   component: FacilitiesPage,
@@ -23,14 +23,14 @@ export const Route = createFileRoute("/facilities")({
 });
 
 const facilities = [
-  { name: "Dining Area", image: cleaning, desc: "Spacious common dining for warm shared meals." },
+  { name: "Dining Area", image: dining, desc: "Spacious common dining for warm shared meals." },
   { name: "Cafeteria / Food Facility", image: food, desc: "Home-style breakfast, lunch and dinner served daily." },
   { name: "Washing Machine", image: washing, desc: "Modern washing machines available round the clock." },
   { name: "24×7 Hot Water", image: hotwater, desc: "Geyser-powered hot water in every bathroom, anytime." },
   { name: "Free WiFi", image: wifi, desc: "High-speed internet across all rooms and common areas." },
   { name: "Power Backup", image: power, desc: "Uninterrupted power for studies, work and comfort." },
   { name: "CCTV Security", image: cctv, desc: "24/7 surveillance covering all entrances and corridors." },
-  { name: "Study Area", image: laundry, desc: "Quiet, well-lit study zones designed for focus." },
+  { name: "Study Area", image: study, desc: "Quiet, well-lit study zones designed for focus." },
 ];
 
 function FacilitiesPage() {
