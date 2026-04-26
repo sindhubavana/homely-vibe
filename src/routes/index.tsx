@@ -1,97 +1,139 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Chatbot } from "@/components/Chatbot";
 import { AmenitiesSection } from "@/components/AmenitiesSection";
 import { InfoCards } from "@/components/InfoCards";
 import { blocks } from "@/data/blocks";
+import hero1 from "@/assets/hero-building.jpg";
+import hero2 from "@/assets/hero-building-2.jpg";
+import hero3 from "@/assets/hero-building-3.jpg";
 
 export const Route = createFileRoute("/")({
   component: Index,
 });
 
+const heroSlides = [hero1, hero2, hero3];
+
+function Hero() {
+  const [active, setActive] = useState(0);
+
+  useEffect(() => {
+    const t = setInterval(() => setActive((i) => (i + 1) % heroSlides.length), 6000);
+    return () => clearInterval(t);
+  }, []);
+
+  const go = (dir: -1 | 1) =>
+    setActive((i) => (i + dir + heroSlides.length) % heroSlides.length);
+
+  return (
+    <section className="relative h-[calc(100svh-4rem)] min-h-[560px] w-full overflow-hidden bg-black">
+      {/* Slides */}
+      {heroSlides.map((src, i) => (
+        <div
+          key={i}
+          className={`absolute inset-0 transition-opacity duration-1000 ${
+            i === active ? "opacity-100" : "opacity-0"
+          }`}
+          aria-hidden={i !== active}
+        >
+          <img
+            src={src}
+            alt="OM SAI PG building"
+            className={`h-full w-full object-cover ${
+              i === active ? "animate-hero-zoom" : ""
+            }`}
+            {...(i === 0 ? { fetchPriority: "high" as const } : { loading: "lazy" as const })}
+          />
+        </div>
+      ))}
+
+      {/* Dark gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/80" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-black/40" />
+
+      {/* Centered content */}
+      <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-5">
+        <div className="max-w-4xl">
+          <p className="text-white/80 text-xs sm:text-sm tracking-[0.35em] uppercase font-medium mb-5 animate-hero-fade" style={{ animationDelay: "100ms" }}>
+            Welcome to Yelahanka
+          </p>
+          <h1 className="font-display font-bold uppercase tracking-tight text-white text-[2.6rem] leading-[0.95] sm:text-7xl lg:text-8xl animate-hero-fade" style={{ animationDelay: "250ms" }}>
+            Luxury PG Facilities
+            <span className="block mt-2 sm:mt-3">
+              At <span className="text-clay italic font-display">OM SAI PG</span>
+            </span>
+          </h1>
+
+          <div className="mx-auto my-7 sm:my-9 h-px w-24 sm:w-32 bg-white/60 animate-hero-fade" style={{ animationDelay: "450ms" }} />
+
+          <p className="text-white/90 text-base sm:text-xl max-w-2xl mx-auto leading-relaxed animate-hero-fade" style={{ animationDelay: "600ms" }}>
+            A comfortable, secure & student-friendly living experience.
+          </p>
+
+          <div className="mt-8 sm:mt-10 flex flex-wrap items-center justify-center gap-3 animate-hero-fade" style={{ animationDelay: "800ms" }}>
+            <a
+              href="#blocks"
+              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-white text-black font-semibold text-sm hover:bg-clay hover:text-white transition-colors"
+            >
+              Explore Blocks
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+            </a>
+            <a
+              href="tel:+919449510381"
+              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full border border-white/40 text-white font-semibold text-sm hover:bg-white/10 transition-colors backdrop-blur"
+            >
+              Book a visit
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {/* Slider arrows */}
+      <button
+        onClick={() => go(-1)}
+        aria-label="Previous slide"
+        className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 z-20 grid h-11 w-11 sm:h-14 sm:w-14 place-items-center rounded-full border border-white/30 text-white bg-black/20 backdrop-blur hover:bg-white hover:text-black transition-colors"
+      >
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+      </button>
+      <button
+        onClick={() => go(1)}
+        aria-label="Next slide"
+        className="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 z-20 grid h-11 w-11 sm:h-14 sm:w-14 place-items-center rounded-full border border-white/30 text-white bg-black/20 backdrop-blur hover:bg-white hover:text-black transition-colors"
+      >
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+      </button>
+
+      {/* Dots */}
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2">
+        {heroSlides.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setActive(i)}
+            aria-label={`Slide ${i + 1}`}
+            className={`h-1.5 rounded-full transition-all ${
+              i === active ? "w-8 bg-white" : "w-3 bg-white/40 hover:bg-white/70"
+            }`}
+          />
+        ))}
+      </div>
+    </section>
+  );
+}
+
 function Index() {
   return (
-    <div className="min-h-screen flex flex-col grain">
+    <div className="min-h-screen flex flex-col">
       <SiteHeader />
       <main className="flex-1">
-        {/* Welcome */}
-        <section className="pt-10 sm:pt-16 pb-8">
-          <div className="mx-auto max-w-6xl px-5 grid lg:grid-cols-[1.1fr_0.9fr] gap-10 lg:gap-16 items-center">
-            <div className="order-2 lg:order-1">
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-accent text-xs font-medium mb-5 animate-float-up">
-                <span className="h-1.5 w-1.5 rounded-full bg-sage" />
-                Now welcoming new residents
-              </div>
-              <h1 className="font-display font-bold text-[44px] sm:text-6xl leading-[1.02] tracking-tight text-balance animate-float-up" style={{ animationDelay: "60ms" }}>
-                A calm place to <span className="text-primary italic">live, study</span> & belong.
-              </h1>
-              <p className="mt-5 text-lg text-muted-foreground max-w-md leading-relaxed animate-float-up" style={{ animationDelay: "120ms" }}>
-                Simple. Comfortable. Reliable. <br className="hidden sm:block" />Designed for everyday living.
-              </p>
-              <div className="mt-7 flex flex-wrap gap-3 animate-float-up" style={{ animationDelay: "180ms" }}>
-                <a href="#blocks" className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-foreground text-background font-medium text-sm hover:opacity-90 transition-opacity">
-                  Explore blocks
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-                </a>
-                <a href="#amenities" className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-card border border-border font-medium text-sm hover:bg-muted transition-colors">
-                  See amenities
-                </a>
-              </div>
-
-              <div className="mt-10 flex items-center gap-6 animate-float-up" style={{ animationDelay: "260ms" }}>
-                <div>
-                  <div className="font-display font-bold text-2xl">3</div>
-                  <div className="text-xs text-muted-foreground uppercase tracking-wider">Blocks</div>
-                </div>
-                <div className="h-8 w-px bg-border" />
-                <div>
-                  <div className="font-display font-bold text-2xl">10+</div>
-                  <div className="text-xs text-muted-foreground uppercase tracking-wider">Amenities</div>
-                </div>
-                <div className="h-8 w-px bg-border" />
-                <div>
-                  <div className="font-display font-bold text-2xl">24×7</div>
-                  <div className="text-xs text-muted-foreground uppercase tracking-wider">Security</div>
-                </div>
-              </div>
-            </div>
-
-            {/* Branding visual */}
-            <div className="order-1 lg:order-2 relative animate-pop-in">
-              <div className="relative aspect-[4/5] rounded-[2.5rem] overflow-hidden shadow-card bg-gradient-to-br from-primary/85 to-clay">
-                <div className="absolute inset-0 grain opacity-40" />
-                <div className="absolute inset-0 flex flex-col justify-between p-7 text-primary-foreground">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <div className="h-10 w-10 rounded-2xl bg-primary-foreground/20 backdrop-blur grid place-items-center font-display font-bold text-xl">ॐ</div>
-                      <div className="text-[11px] uppercase tracking-[0.2em] opacity-80">Est. Yelahanka</div>
-                    </div>
-                    <div className="text-[11px] uppercase tracking-[0.2em] opacity-80">№ 01</div>
-                  </div>
-                  <div>
-                    <div className="font-display font-bold text-5xl sm:text-6xl leading-[0.95] tracking-tight">OM<br/>SAI</div>
-                    <div className="mt-3 text-sm uppercase tracking-[0.25em] opacity-90">Luxury Ladies PG</div>
-                    <div className="mt-6 flex items-center gap-3 text-xs">
-                      <div className="h-px w-10 bg-primary-foreground/60" />
-                      <span className="opacity-80">A second home, made simple.</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="absolute -bottom-4 -left-4 h-20 w-20 rounded-3xl bg-sage shadow-card grid place-items-center text-2xl">🌿</div>
-              <div className="absolute -top-3 -right-3 px-3 py-2 rounded-2xl bg-card shadow-card text-xs font-semibold flex items-center gap-1.5">
-                <span className="h-1.5 w-1.5 rounded-full bg-sage" />
-                10 rooms available
-              </div>
-            </div>
-          </div>
-        </section>
+        <Hero />
 
         {/* Blocks */}
-        <section id="blocks" className="py-12 sm:py-20">
+        <section id="blocks" className="py-14 sm:py-20 grain">
           <div className="mx-auto max-w-6xl px-5">
-            <div className="flex items-end justify-between mb-7">
+            <div className="flex items-end justify-between mb-8">
               <div>
                 <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary mb-2">Pick a home</p>
                 <h2 className="text-3xl sm:text-4xl font-display font-bold">Our Blocks</h2>
@@ -129,7 +171,7 @@ function Index() {
                     <p className="text-sm opacity-90 mt-1.5 line-clamp-2">{b.description}</p>
                     <div className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium">
                       View rooms
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" className="transition-transform group-hover:translate-x-1"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" className="transition-transform group-hover:translate-x-1"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
                     </div>
                   </div>
                 </Link>
