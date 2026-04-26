@@ -36,7 +36,8 @@ export const Route = createFileRoute("/blocks/$slug")({
 
 function BlockPage() {
   const { block } = Route.useLoaderData();
-  const [reserved, setReserved] = useState<string | null>(null);
+  const [reserved, setReserved] = useState<Set<string>>(new Set());
+  const [activeRoom, setActiveRoom] = useState<Room | null>(null);
 
   return (
     <div className="min-h-screen flex flex-col grain">
@@ -75,7 +76,7 @@ function BlockPage() {
             </div>
             <div className="space-y-6">
               {block.rooms.map((room, i) => (
-                <RoomCard key={room.id} room={room} index={i} reserved={reserved === room.id} onReserve={() => setReserved(room.id)} />
+                <RoomCard key={room.id} room={room} index={i} reserved={reserved.has(room.id)} onReserve={() => setActiveRoom(room)} />
               ))}
             </div>
           </div>
@@ -85,6 +86,119 @@ function BlockPage() {
       </main>
       <SiteFooter />
       <Chatbot />
+      {activeRoom && (
+        <ReserveModal
+          room={activeRoom}
+          onClose={() => setActiveRoom(null)}
+          onConfirm={() => {
+            setReserved((s) => new Set(s).add(activeRoom.id));
+            setActiveRoom(null);
+          }}
+        />
+      )}
+    </div>
+  );
+}
+
+function ReserveModal({ room, onClose, onConfirm }: { room: Room; onClose: () => void; onConfirm: () => void }) {
+  const [name, setName] = useState("");
+  const [mobile, setMobile] = useState("");
+  const [email, setEmail] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const [done, setDone] = useState(false);
+
+  const valid =
+    name.trim().length >= 2 &&
+    /^[0-9]{10}$/.test(mobile.trim()) &&
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
+
+  const submit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!valid) return;
+    setSubmitting(true);
+    setTimeout(() => {
+      setSubmitting(false);
+      setDone(true);
+      setTimeout(() => onConfirm(), 1400);
+    }, 700);
+  };
+
+  return (
+    <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm grid place-items-center p-4 animate-pop-in" onClick={onClose}>
+      <div onClick={(e) => e.stopPropagation()} className="relative w-full max-w-md rounded-3xl bg-card shadow-float overflow-hidden">
+        <button onClick={onClose} aria-label="Close" className="absolute top-3 right-3 z-10 h-9 w-9 rounded-full bg-background/90 grid place-items-center hover:scale-105 transition-transform">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        </button>
+
+        {done ? (
+          <div className="p-8 text-center">
+            <div className="mx-auto mb-4 h-14 w-14 rounded-full bg-sage/30 grid place-items-center">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            </div>
+            <h3 className="font-display font-bold text-2xl mb-1">Reserved!</h3>
+            <p className="text-sm text-muted-foreground">Thanks {name.split(" ")[0]} — we'll call you on {mobile} shortly to confirm {room.name}.</p>
+          </div>
+        ) : (
+          <form onSubmit={submit} className="p-6">
+            <div className="flex items-center gap-3 mb-5">
+              <img src={room.image} alt={room.name} className="h-14 w-14 rounded-2xl object-cover" />
+              <div>
+                <div className="text-[11px] uppercase tracking-wider text-muted-foreground">Reserving</div>
+                <div className="font-display font-bold text-lg leading-tight">{room.name}</div>
+                <div className="text-xs text-muted-foreground">₹{room.rent.toLocaleString("en-IN")}/mo · {room.type}</div>
+              </div>
+            </div>
+
+            <div className="space-y-3">
+              <div>
+                <label className="text-xs font-semibold text-foreground/80 mb-1.5 block">Your name</label>
+                <input
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="Full name"
+                  maxLength={80}
+                  required
+                  className="w-full px-4 py-3 rounded-2xl bg-background border border-border text-sm focus:outline-none focus:ring-2 focus:ring-primary/40"
+                />
+              </div>
+              <div>
+                <label className="text-xs font-semibold text-foreground/80 mb-1.5 block">Mobile number</label>
+                <input
+                  type="tel"
+                  value={mobile}
+                  onChange={(e) => setMobile(e.target.value.replace(/\D/g, "").slice(0, 10))}
+                  placeholder="10-digit mobile"
+                  inputMode="numeric"
+                  required
+                  className="w-full px-4 py-3 rounded-2xl bg-background border border-border text-sm focus:outline-none focus:ring-2 focus:ring-primary/40"
+                />
+              </div>
+              <div>
+                <label className="text-xs font-semibold text-foreground/80 mb-1.5 block">Email</label>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="you@example.com"
+                  maxLength={120}
+                  required
+                  className="w-full px-4 py-3 rounded-2xl bg-background border border-border text-sm focus:outline-none focus:ring-2 focus:ring-primary/40"
+                />
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              disabled={!valid || submitting}
+              className="mt-5 w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-2xl bg-primary text-primary-foreground font-medium text-sm hover:opacity-90 transition-opacity disabled:opacity-50"
+            >
+              {submitting ? "Reserving…" : "Confirm reservation"}
+            </button>
+            <p className="mt-2 text-[11px] text-muted-foreground text-center">We'll call you to verify before final booking.</p>
+          </form>
+        )}
+      </div>
     </div>
   );
 }
