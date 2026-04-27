@@ -24,7 +24,7 @@ function ContactPage() {
       <SiteHeader />
       <main className="flex-1 mx-auto max-w-5xl w-full px-5 py-14">
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary mb-3">Get in touch</p>
-        <h1 className="font-display font-bold text-4xl sm:text-5xl tracking-tight mb-4">Come say hello.</h1>
+        <h1 className="font-display font-bold text-4xl sm:text-5xl tracking-tight mb-4">Contact Us</h1>
         <p className="text-muted-foreground text-lg max-w-xl mb-10">We'd love to show you around. Drop by, call us, or message — we'll help you find a room that feels like home.</p>
 
         <div className="grid md:grid-cols-2 gap-5">

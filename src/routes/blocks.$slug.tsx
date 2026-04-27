@@ -3,7 +3,6 @@ import { useState } from "react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Chatbot } from "@/components/Chatbot";
-import { AmenitiesSection } from "@/components/AmenitiesSection";
 import { getBlock, type Room } from "@/data/blocks";
 
 export const Route = createFileRoute("/blocks/$slug")({
@@ -151,7 +150,6 @@ function BlockPage() {
           </div>
         </section>
 
-        <AmenitiesSection />
       </main>
       <SiteFooter />
       <Chatbot />
@@ -180,7 +178,7 @@ function RoomCard({ room, reserved, onReserve }: { room: Room; reserved: boolean
           <div className="font-display font-bold text-base leading-none">{room.name}</div>
           <span className="text-[10px] px-2 py-0.5 rounded-full bg-sage/20 text-sage-foreground font-semibold whitespace-nowrap">{room.type}</span>
         </div>
-        <div className="text-[11px] text-muted-foreground mt-1.5">₹{room.rent.toLocaleString("en-IN")}/year · meals · WiFi</div>
+        <div className="text-[11px] text-muted-foreground mt-1.5">Meals · WiFi · Hot water</div>
         <button
           onClick={onReserve}
           disabled={reserved}
@@ -245,7 +243,7 @@ function ReserveModal({ room, onClose, onConfirm }: { room: Room; onClose: () =>
               <div>
                 <div className="text-[11px] uppercase tracking-wider text-muted-foreground">Reserving</div>
                 <div className="font-display font-bold text-lg leading-tight">{room.name}</div>
-                <div className="text-xs text-muted-foreground">₹{room.rent.toLocaleString("en-IN")}/year · {room.type}</div>
+                <div className="text-xs text-muted-foreground">{room.type}</div>
               </div>
             </div>
 

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Chatbot } from "@/components/Chatbot";
-import { AmenitiesSection } from "@/components/AmenitiesSection";
+import { MapEmbed } from "@/components/MapEmbed";
 import { blocks } from "@/data/blocks";
 import hero1 from "@/assets/hero-real-1.png";
 import hero2 from "@/assets/hero-real-2.png";
@@ -55,13 +55,11 @@ function Hero() {
       <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-5">
         <div className="max-w-4xl">
           <p className="text-white/80 text-xs sm:text-sm tracking-[0.35em] uppercase font-medium mb-5 animate-hero-fade" style={{ animationDelay: "100ms" }}>
-            Welcome to Yelahanka
+            Welcome to
           </p>
           <h1 className="font-display font-bold uppercase tracking-tight text-white text-[2.6rem] leading-[0.95] sm:text-7xl lg:text-8xl animate-hero-fade" style={{ animationDelay: "250ms" }}>
-            Luxury PG Facilities
-            <span className="block mt-2 sm:mt-3">
-              At <span className="text-clay italic font-display">OM SAI PG</span>
-            </span>
+            <span className="text-clay italic font-display">OM SAI PG</span>
+            <span className="block mt-2 sm:mt-3">YELAHANKA</span>
           </h1>
 
           <div className="mx-auto my-7 sm:my-9 h-px w-24 sm:w-32 bg-white/60 animate-hero-fade" style={{ animationDelay: "450ms" }} />
@@ -69,16 +67,6 @@ function Hero() {
           <p className="text-white/90 text-base sm:text-xl max-w-2xl mx-auto leading-relaxed animate-hero-fade" style={{ animationDelay: "600ms" }}>
             A comfortable, secure & student-friendly living experience.
           </p>
-
-          <div className="mt-8 sm:mt-10 flex items-center justify-center animate-hero-fade" style={{ animationDelay: "800ms" }}>
-            <a
-              href="#blocks"
-              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-white text-black font-semibold text-sm hover:bg-clay hover:text-white transition-colors"
-            >
-              Explore Blocks
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-            </a>
-          </div>
         </div>
       </div>
 
@@ -127,7 +115,6 @@ function Index() {
           <div className="mx-auto max-w-6xl px-5">
             <div className="flex items-end justify-between mb-8">
               <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary mb-2">Pick a home</p>
                 <h2 className="text-3xl sm:text-4xl font-display font-bold">Our Blocks</h2>
               </div>
               <div className="hidden sm:flex items-center gap-1.5 text-xs text-muted-foreground">
@@ -175,7 +162,7 @@ function Index() {
           </div>
         </section>
 
-        <AmenitiesSection />
+        <MapEmbed />
       </main>
       <SiteFooter />
       <Chatbot />
