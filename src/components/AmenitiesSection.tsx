@@ -10,7 +10,7 @@ export function AmenitiesSection() {
         <div className="flex items-end justify-between mb-6">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary mb-2">Inside the PG</p>
-            <h2 className="text-3xl sm:text-4xl font-display font-bold text-balance">Everything you need, taken care of</h2>
+            <h2 className="text-3xl sm:text-4xl font-display font-bold text-balance">Amenities & comforts</h2>
           </div>
           <div className="hidden sm:block text-sm text-muted-foreground">Tap to view →</div>
         </div>
