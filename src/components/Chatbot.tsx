@@ -5,14 +5,18 @@ type Msg = { from: "bot" | "user"; text: string };
 const QUICK = [
   "Room availability?",
   "What's the fee per annum?",
+  "How to contact?",
+  "What is the closing time for PG?",
 ];
 
 function answer(q: string): string {
   const s = q.toLowerCase();
   if (s.includes("avail") || s.includes("room")) return "Block A has 3 rooms left, Block B has 5, Block C has 2. Tap any block to see room cards.";
   if (s.includes("fee") || s.includes("rent") || s.includes("price") || s.includes("cost") || s.includes("annum")) return "₹1,35,000 per annum for both 2-sharing and 3-sharing rooms.";
+  if (s.includes("contact") || s.includes("call") || s.includes("phone") || s.includes("reach")) return "You can reach us at +91 94495 10381, +91 94820 52116, or +91 63634 73962. Visit the Contact page for more details.";
+  if (s.includes("closing") || s.includes("close") || s.includes("curfew") || s.includes("time")) return "PG closing time is 9:30 PM. Please plan to be back before then.";
   if (s.includes("location") || s.includes("where")) return "Avalahalli Village, Yelahanka, Bangalore — close to BMSIT College.";
-  return "I can help with rooms and fees. Try one of the quick questions below 👇";
+  return "I can help with rooms, fees, contact info, and timings. Try one of the quick questions below 👇";
 }
 
 export function Chatbot() {

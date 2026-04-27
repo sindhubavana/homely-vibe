@@ -176,7 +176,7 @@ function RoomCard({ room, reserved, onReserve }: { room: Room; reserved: boolean
           <div className="font-display font-bold text-base leading-none">{room.name}</div>
           <span className="text-[10px] px-2 py-0.5 rounded-full bg-sage/20 text-sage-foreground font-semibold whitespace-nowrap">{room.type}</span>
         </div>
-        <div className="text-[11px] text-muted-foreground mt-1.5">Comfortable shared accommodation</div>
+        
         <button
           onClick={onReserve}
           disabled={reserved}
