@@ -26,6 +26,7 @@ export type Block = {
   audience: "Girls" | "Boys";
   image: string;
   location: string;
+  mapQuery: string;
   available: number;
   description: string;
   pricing: { type: Sharing; price: number }[];
@@ -60,6 +61,7 @@ export const blocks: Block[] = [
     audience: "Girls",
     image: blockA,
     location: "Sri Saila Nilaya, Yelahanka New Town, Bengaluru",
+    mapQuery: "Sri Saila Nilaya Avalahalli Yelahanka Bangalore 560064",
     available: 12,
     description: "Our flagship block with bright glass-front lounges and study spaces.",
     pricing: [
@@ -75,6 +77,7 @@ export const blocks: Block[] = [
     audience: "Girls",
     image: blockB,
     location: "Sri Shyla Nilaya, Yelahanka, Bengaluru",
+    mapQuery: "Sri Shyla Nilaya Yelahanka Bangalore",
     available: 8,
     description: "Quiet residential block with garden seating and dedicated study corners.",
     pricing: [
@@ -90,6 +93,7 @@ export const blocks: Block[] = [
     audience: "Girls",
     image: blockC,
     location: "Vista #44, Yelahanka, Bengaluru",
+    mapQuery: "Vista 44 Yelahanka Bangalore",
     available: 6,
     description: "Modern high-rise block with balcony rooms and the best skyline views.",
     pricing: [
