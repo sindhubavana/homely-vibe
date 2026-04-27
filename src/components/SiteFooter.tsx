@@ -7,7 +7,7 @@ export function SiteFooter() {
             <div className="h-9 w-9 rounded-2xl bg-primary text-primary-foreground grid place-items-center font-display font-bold">ॐ</div>
             <div className="font-display font-bold">OM SAI Luxury Ladies PG</div>
           </div>
-          <p className="text-sm text-muted-foreground leading-relaxed">A safe space for working women and students in Yelahanka.</p>
+          
         </div>
         <div>
           <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3">Visit</div>
