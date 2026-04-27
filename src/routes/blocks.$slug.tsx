@@ -104,12 +104,15 @@ function BlockPage() {
         {/* Floors */}
         <section className="pb-12">
           <div className="mx-auto max-w-6xl px-5">
-            <div className="flex items-end justify-between mb-5">
+            <div className="flex items-end justify-between mb-5 gap-4 flex-wrap">
               <div>
                 <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary mb-2">Browse by floor</p>
                 <h2 className="font-display font-bold text-2xl sm:text-3xl">Available rooms</h2>
               </div>
-              <span className="hidden sm:block text-xs text-muted-foreground">Tap a floor to view rooms</span>
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-sage/20 text-sage-foreground text-xs font-semibold">
+                <span className="h-1.5 w-1.5 rounded-full bg-sage" />
+                {reservedCount} {memberLabel} reserved
+              </div>
             </div>
 
             <div className="space-y-3">
@@ -150,6 +153,15 @@ function BlockPage() {
                 );
               })}
             </div>
+          </div>
+        </section>
+
+        {/* Block location map */}
+        <section className="pb-16">
+          <div className="mx-auto max-w-6xl px-5">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary mb-2">Find us</p>
+            <h2 className="font-display font-bold text-2xl sm:text-3xl mb-5">{block.name} location</h2>
+            <SingleMap item={{ label: block.name, query: block.mapQuery, address: block.location }} />
           </div>
         </section>
 
