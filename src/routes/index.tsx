@@ -56,16 +56,12 @@ function Hero() {
           <p className="text-white/80 text-xs sm:text-sm tracking-[0.35em] uppercase font-medium mb-5 animate-hero-fade" style={{ animationDelay: "100ms" }}>
             Welcome to
           </p>
-          <h1 className="font-display font-bold uppercase tracking-tight text-white text-[2.6rem] leading-[0.95] sm:text-7xl lg:text-8xl animate-hero-fade" style={{ animationDelay: "250ms" }}>
-            <span className="text-clay italic font-display">OM SAI PG</span>
-            <span className="block mt-2 sm:mt-3">YELAHANKA</span>
+          <h1 className="font-display font-bold uppercase tracking-tight text-white text-[2.4rem] leading-[0.95] sm:text-6xl lg:text-7xl animate-hero-fade" style={{ animationDelay: "250ms" }}>
+            <span className="block">BMSIT Hostels</span>
+            <span className="block mt-2 sm:mt-3 text-clay italic font-display">OM SAI PG</span>
           </h1>
 
           <div className="mx-auto my-7 sm:my-9 h-px w-24 sm:w-32 bg-white/60 animate-hero-fade" style={{ animationDelay: "450ms" }} />
-
-          <p className="text-white/90 text-base sm:text-xl max-w-2xl mx-auto leading-relaxed animate-hero-fade" style={{ animationDelay: "600ms" }}>
-            A comfortable, secure & student-friendly living experience.
-          </p>
         </div>
       </div>
 
