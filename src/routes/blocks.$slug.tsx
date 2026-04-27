@@ -39,6 +39,9 @@ function BlockPage() {
   const [activeRoom, setActiveRoom] = useState<Room | null>(null);
   const [openFloor, setOpenFloor] = useState<number>(1);
 
+  const reservedCount = reserved.size;
+  const memberLabel = reservedCount === 1 ? "member" : "members";
+
   return (
     <div className="min-h-screen flex flex-col grain">
       <SiteHeader />
