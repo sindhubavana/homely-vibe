@@ -38,13 +38,14 @@ function BlockPage() {
   const { block } = Route.useLoaderData();
   const [reserved, setReserved] = useState<Set<string>>(new Set());
   const [activeRoom, setActiveRoom] = useState<Room | null>(null);
+  const [openFloor, setOpenFloor] = useState<number>(1);
 
   return (
     <div className="min-h-screen flex flex-col grain">
       <SiteHeader />
       <main className="flex-1">
         {/* Hero */}
-        <section className="pt-6 pb-10">
+        <section className="pt-6 pb-8">
           <div className="mx-auto max-w-6xl px-5">
             <Link to="/" className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground mb-5">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
@@ -53,7 +54,7 @@ function BlockPage() {
 
             <div className="relative aspect-[16/8] sm:aspect-[16/6] rounded-[2rem] overflow-hidden shadow-card animate-pop-in">
               <img src={block.image} alt={block.name} className="absolute inset-0 h-full w-full object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8 text-white">
                 <div className="flex items-center gap-2 mb-3">
                   <span className="px-2.5 py-1 rounded-full bg-background/90 text-foreground text-[11px] font-semibold uppercase tracking-wider">{block.audience}</span>
@@ -61,23 +62,91 @@ function BlockPage() {
                 </div>
                 <div className="text-xs uppercase tracking-[0.2em] opacity-80">{block.tag}</div>
                 <h1 className="font-display font-bold text-4xl sm:text-5xl mt-1">{block.name}</h1>
-                <p className="text-sm sm:text-base opacity-90 mt-2 max-w-xl">{block.description}</p>
+                <div className="mt-2 flex items-start gap-1.5 text-sm opacity-90 max-w-xl">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mt-0.5 shrink-0"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                  <span>{block.location}</span>
+                </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Rooms feed */}
+        {/* Pricing */}
         <section className="pb-10">
-          <div className="mx-auto max-w-2xl px-5">
-            <div className="flex items-center justify-between mb-5">
-              <h2 className="font-display font-bold text-2xl">Available rooms</h2>
-              <span className="text-xs text-muted-foreground">{block.rooms.length} posts</span>
+          <div className="mx-auto max-w-6xl px-5">
+            <div className="relative rounded-[1.75rem] overflow-hidden p-6 sm:p-8 bg-gradient-to-br from-primary to-primary/80 text-primary-foreground shadow-float animate-float-up">
+              <div className="absolute inset-0 opacity-20 pointer-events-none" style={{ backgroundImage: "radial-gradient(circle at 20% 20%, white 1px, transparent 1px), radial-gradient(circle at 80% 60%, white 1px, transparent 1px)", backgroundSize: "32px 32px" }} />
+              <div className="relative">
+                <div className="flex items-center gap-2 mb-1">
+                  <span className="text-[11px] font-semibold uppercase tracking-[0.18em] opacity-90">Pricing</span>
+                  <span className="px-2 py-0.5 rounded-full bg-white/20 text-[10px] font-bold uppercase tracking-wider">Per Annum</span>
+                </div>
+                <h2 className="font-display font-bold text-2xl sm:text-3xl mb-5">All-inclusive — meals, WiFi, hot water</h2>
+                <div className="grid sm:grid-cols-2 gap-3 sm:gap-4">
+                  {block.pricing.map((p) => (
+                    <div key={p.type} className="rounded-2xl bg-white/10 backdrop-blur border border-white/20 p-5 hover:bg-white/15 transition-colors">
+                      <div className="text-xs uppercase tracking-wider opacity-80">{p.type}</div>
+                      <div className="font-display font-bold text-3xl sm:text-4xl mt-1">
+                        ₹{p.price.toLocaleString("en-IN")}
+                        <span className="text-sm font-medium opacity-80"> /year</span>
+                      </div>
+                      <div className="text-xs opacity-80 mt-1.5">Includes meals, utilities & amenities</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
-            <div className="space-y-6">
-              {block.rooms.map((room, i) => (
-                <RoomCard key={room.id} room={room} index={i} reserved={reserved.has(room.id)} onReserve={() => setActiveRoom(room)} />
-              ))}
+          </div>
+        </section>
+
+        {/* Floors */}
+        <section className="pb-12">
+          <div className="mx-auto max-w-6xl px-5">
+            <div className="flex items-end justify-between mb-5">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary mb-2">Browse by floor</p>
+                <h2 className="font-display font-bold text-2xl sm:text-3xl">Available rooms</h2>
+              </div>
+              <span className="hidden sm:block text-xs text-muted-foreground">Tap a floor to view rooms</span>
+            </div>
+
+            <div className="space-y-3">
+              {block.floors.map((floor) => {
+                const isOpen = openFloor === floor.number;
+                return (
+                  <div key={floor.number} className="rounded-2xl border border-border bg-card shadow-soft overflow-hidden transition-all">
+                    <button
+                      onClick={() => setOpenFloor(isOpen ? -1 : floor.number)}
+                      className="w-full flex items-center justify-between gap-4 px-5 py-4 hover:bg-muted/40 transition-colors"
+                      aria-expanded={isOpen}
+                    >
+                      <div className="flex items-center gap-3">
+                        <div className={`h-11 w-11 rounded-xl grid place-items-center font-display font-bold transition-colors ${isOpen ? "bg-primary text-primary-foreground" : "bg-muted text-foreground"}`}>
+                          F{floor.number}
+                        </div>
+                        <div className="text-left">
+                          <div className="font-display font-bold text-lg leading-tight">Floor {floor.number}</div>
+                          <div className="text-xs text-muted-foreground">{floor.rooms.length} rooms available</div>
+                        </div>
+                      </div>
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" className={`transition-transform ${isOpen ? "rotate-180" : ""}`}><path d="m6 9 6 6 6-6"/></svg>
+                    </button>
+
+                    {isOpen && (
+                      <div className="px-4 sm:px-5 pb-5 pt-1 grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 animate-float-up">
+                        {floor.rooms.map((room) => (
+                          <RoomCard
+                            key={room.id}
+                            room={room}
+                            reserved={reserved.has(room.id)}
+                            onReserve={() => setActiveRoom(room)}
+                          />
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
             </div>
           </div>
         </section>
@@ -97,6 +166,37 @@ function BlockPage() {
         />
       )}
     </div>
+  );
+}
+
+function RoomCard({ room, reserved, onReserve }: { room: Room; reserved: boolean; onReserve: () => void }) {
+  return (
+    <article className="group rounded-2xl bg-background border border-border overflow-hidden hover:shadow-card hover:-translate-y-0.5 transition-all">
+      <div className="aspect-[4/3] bg-muted overflow-hidden">
+        <img src={room.image} alt={room.name} loading="lazy" className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500" />
+      </div>
+      <div className="p-3">
+        <div className="flex items-center justify-between gap-2">
+          <div className="font-display font-bold text-base leading-none">{room.name}</div>
+          <span className="text-[10px] px-2 py-0.5 rounded-full bg-sage/20 text-sage-foreground font-semibold whitespace-nowrap">{room.type}</span>
+        </div>
+        <div className="text-[11px] text-muted-foreground mt-1.5">₹{room.rent.toLocaleString("en-IN")}/year · meals · WiFi</div>
+        <button
+          onClick={onReserve}
+          disabled={reserved}
+          className="mt-3 w-full inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl bg-primary text-primary-foreground font-medium text-xs hover:opacity-90 transition-opacity disabled:opacity-60 disabled:cursor-default"
+        >
+          {reserved ? (
+            <>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+              Reserved
+            </>
+          ) : (
+            <>Reserve</>
+          )}
+        </button>
+      </div>
+    </article>
   );
 }
 
@@ -145,7 +245,7 @@ function ReserveModal({ room, onClose, onConfirm }: { room: Room; onClose: () =>
               <div>
                 <div className="text-[11px] uppercase tracking-wider text-muted-foreground">Reserving</div>
                 <div className="font-display font-bold text-lg leading-tight">{room.name}</div>
-                <div className="text-xs text-muted-foreground">₹{room.rent.toLocaleString("en-IN")}/mo · {room.type}</div>
+                <div className="text-xs text-muted-foreground">₹{room.rent.toLocaleString("en-IN")}/year · {room.type}</div>
               </div>
             </div>
 
@@ -200,62 +300,5 @@ function ReserveModal({ room, onClose, onConfirm }: { room: Room; onClose: () =>
         )}
       </div>
     </div>
-  );
-}
-
-function RoomCard({ room, index, reserved, onReserve }: { room: Room; index: number; reserved: boolean; onReserve: () => void }) {
-  const [liked, setLiked] = useState(false);
-
-  return (
-    <article
-      className="rounded-3xl bg-card border border-border shadow-soft overflow-hidden animate-float-up"
-      style={{ animationDelay: `${index * 80}ms` }}
-    >
-      <div className="px-4 py-3 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <div className="h-9 w-9 rounded-full bg-primary text-primary-foreground grid place-items-center font-display font-bold text-sm">ॐ</div>
-          <div className="leading-tight">
-            <div className="font-semibold text-sm">{room.name}</div>
-            <div className="text-[11px] text-muted-foreground">{room.type}</div>
-          </div>
-        </div>
-        <span className="text-[11px] px-2 py-1 rounded-full bg-sage/20 text-sage-foreground font-semibold">{room.left} left</span>
-      </div>
-
-      <div className="aspect-square bg-muted">
-        <img src={room.image} alt={room.name} loading="lazy" className="h-full w-full object-cover" />
-      </div>
-
-      <div className="px-4 py-3 flex items-center gap-4">
-        <button onClick={() => setLiked((l) => !l)} aria-label="Like" className="transition-transform active:scale-90">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill={liked ? "oklch(0.55 0.13 40)" : "none"} stroke={liked ? "oklch(0.55 0.13 40)" : "currentColor"} strokeWidth="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" strokeLinecap="round" strokeLinejoin="round"/></svg>
-        </button>
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
-        <div className="ml-auto text-right">
-          <div className="font-display font-bold text-lg leading-none">₹{room.rent.toLocaleString("en-IN")}<span className="text-xs font-medium text-muted-foreground">/mo</span></div>
-        </div>
-      </div>
-
-      <div className="px-4 pb-4">
-        <p className="text-sm text-foreground/80 leading-relaxed">
-          <span className="font-semibold">{room.name}</span> · {room.type.toLowerCase()} · meals included · attached bath · study desk · wardrobe
-        </p>
-        <button
-          onClick={onReserve}
-          disabled={reserved}
-          className="mt-3 w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-2xl bg-primary text-primary-foreground font-medium text-sm hover:opacity-90 transition-opacity disabled:opacity-60 disabled:cursor-default"
-        >
-          {reserved ? (
-            <>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-              Reserved — we'll call you shortly
-            </>
-          ) : (
-            <>Reserve this room</>
-          )}
-        </button>
-      </div>
-    </article>
   );
 }
