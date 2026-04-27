@@ -9,7 +9,8 @@ import roomDouble from "@/assets/room-double.jpg";
 import roomTriple from "@/assets/room-triple.jpg";
 import food from "@/assets/amenity-food.jpg";
 import wifi from "@/assets/amenity-wifi.jpg";
-import laundry from "@/assets/amenity-laundry.jpg";
+import corridor1 from "@/assets/corridor-1.jpg";
+import corridor2 from "@/assets/corridor-2.jpg";
 
 export const Route = createFileRoute("/gallery")({
   component: GalleryPage,
@@ -30,7 +31,8 @@ const photos = [
   { src: roomTriple, label: "Triple sharing" },
   { src: food, label: "Home-style meals" },
   { src: wifi, label: "High-speed Wi-Fi" },
-  { src: laundry, label: "Laundry & ironing" },
+  { src: corridor1, label: "Bright corridor" },
+  { src: corridor2, label: "Evening corridor" },
 ];
 
 function GalleryPage() {
