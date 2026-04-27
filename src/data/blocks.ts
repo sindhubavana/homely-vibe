@@ -1,17 +1,22 @@
 import blockA from "@/assets/block-a-entrance.jpg";
 import blockB from "@/assets/block-b-shyla.jpg";
 import blockC from "@/assets/block-c-vista.jpg";
-import roomSingle from "@/assets/room-single.jpg";
 import roomDouble from "@/assets/room-double.jpg";
 import roomTriple from "@/assets/room-triple.jpg";
+
+export type Sharing = "2-Sharing" | "3-Sharing";
 
 export type Room = {
   id: string;
   name: string;
-  type: "Single" | "Double Sharing" | "Triple Sharing";
-  rent: number;
-  left: number;
+  type: Sharing;
+  rent: number; // per annum
   image: string;
+};
+
+export type Floor = {
+  number: number;
+  rooms: Room[];
 };
 
 export type Block = {
@@ -20,52 +25,78 @@ export type Block = {
   tag: string;
   audience: "Girls" | "Boys";
   image: string;
+  location: string;
   available: number;
   description: string;
-  rooms: Room[];
+  pricing: { type: Sharing; price: number }[];
+  floors: Floor[];
 };
+
+const PRICE_2 = 135000;
+const PRICE_3 = 135000;
+
+function buildFloors(prefix: string): Floor[] {
+  return [1, 2, 3, 4, 5].map((floor) => ({
+    number: floor,
+    rooms: Array.from({ length: 9 }).map((_, i) => {
+      const roomNum = floor * 100 + (i + 1);
+      const isTriple = i % 2 === 1; // alternate
+      return {
+        id: `${prefix}-${roomNum}`,
+        name: `${prefix}${roomNum}`,
+        type: isTriple ? "3-Sharing" : "2-Sharing",
+        rent: isTriple ? PRICE_3 : PRICE_2,
+        image: isTriple ? roomTriple : roomDouble,
+      } as Room;
+    }),
+  }));
+}
 
 export const blocks: Block[] = [
   {
     slug: "a",
     name: "Block A",
-    tag: "Sri Saila Nilaya",
+    tag: "Premium Girls Accommodation",
     audience: "Girls",
     image: blockA,
-    available: 3,
+    location: "Sri Saila Nilaya, Yelahanka New Town, Bengaluru",
+    available: 12,
     description: "Our flagship block with bright glass-front lounges and study spaces.",
-    rooms: [
-      { id: "a-101", name: "Room 101", type: "Single", rent: 9500, left: 1, image: roomSingle },
-      { id: "a-102", name: "Room 102", type: "Double Sharing", rent: 7500, left: 1, image: roomDouble },
-      { id: "a-205", name: "Room 205", type: "Triple Sharing", rent: 6500, left: 1, image: roomTriple },
+    pricing: [
+      { type: "2-Sharing", price: PRICE_2 },
+      { type: "3-Sharing", price: PRICE_3 },
     ],
+    floors: buildFloors("A"),
   },
   {
     slug: "b",
     name: "Block B",
-    tag: "Sri Shyla Nilaya",
+    tag: "Premium Girls Accommodation",
     audience: "Girls",
     image: blockB,
-    available: 5,
+    location: "Sri Shyla Nilaya, Yelahanka, Bengaluru",
+    available: 8,
     description: "Quiet residential block with garden seating and dedicated study corners.",
-    rooms: [
-      { id: "b-201", name: "Room 201", type: "Single", rent: 9500, left: 2, image: roomSingle },
-      { id: "b-204", name: "Room 204", type: "Double Sharing", rent: 7500, left: 2, image: roomDouble },
-      { id: "b-301", name: "Room 301", type: "Triple Sharing", rent: 6500, left: 1, image: roomTriple },
+    pricing: [
+      { type: "2-Sharing", price: PRICE_2 },
+      { type: "3-Sharing", price: PRICE_3 },
     ],
+    floors: buildFloors("B"),
   },
   {
     slug: "c",
     name: "Block C",
-    tag: "Vista #44",
+    tag: "Premium Girls Accommodation",
     audience: "Girls",
     image: blockC,
-    available: 2,
+    location: "Vista #44, Yelahanka, Bengaluru",
+    available: 6,
     description: "Modern high-rise block with balcony rooms and the best skyline views.",
-    rooms: [
-      { id: "c-402", name: "Room 402", type: "Single", rent: 10000, left: 1, image: roomSingle },
-      { id: "c-405", name: "Room 405", type: "Double Sharing", rent: 7800, left: 1, image: roomDouble },
+    pricing: [
+      { type: "2-Sharing", price: PRICE_2 },
+      { type: "3-Sharing", price: PRICE_3 },
     ],
+    floors: buildFloors("C"),
   },
 ];
 
