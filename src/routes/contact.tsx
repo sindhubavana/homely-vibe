@@ -1,7 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
-import { Chatbot } from "@/components/Chatbot";
 
 export const Route = createFileRoute("/contact")({
   component: ContactPage,
@@ -53,7 +52,6 @@ function ContactPage() {
         </div>
       </main>
       <SiteFooter />
-      <Chatbot />
     </div>
   );
 }

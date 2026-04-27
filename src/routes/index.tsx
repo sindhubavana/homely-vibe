@@ -2,7 +2,6 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
-import { Chatbot } from "@/components/Chatbot";
 import { MapEmbed } from "@/components/MapEmbed";
 import { blocks } from "@/data/blocks";
 import hero1 from "@/assets/hero-real-1.png";
@@ -165,7 +164,6 @@ function Index() {
         <MapEmbed />
       </main>
       <SiteFooter />
-      <Chatbot />
     </div>
   );
 }

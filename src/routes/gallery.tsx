@@ -1,7 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
-import { Chatbot } from "@/components/Chatbot";
 import blockA from "@/assets/block-a-entrance.jpg";
 import blockB from "@/assets/block-b-shyla.jpg";
 import blockC from "@/assets/block-c-vista.jpg";
@@ -54,7 +53,6 @@ function GalleryPage() {
         </div>
       </main>
       <SiteFooter />
-      <Chatbot />
     </div>
   );
 }
