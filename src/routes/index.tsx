@@ -157,7 +157,9 @@ function Index() {
           </div>
         </section>
 
-        <MapEmbed />
+        <MapEmbed
+          items={blocks.map((b) => ({ label: b.name, query: b.mapQuery, address: b.location }))}
+        />
       </main>
       <SiteFooter />
     </div>
