@@ -172,8 +172,11 @@ function BlockPage() {
           room={activeRoom}
           onClose={() => setActiveRoom(null)}
           onConfirm={() => {
-            setReserved((s) => new Set(s).add(activeRoom.id));
-            setActiveRoom(null);
+            setReserved((s) => {
+              const next = new Set(s);
+              next.add(activeRoom.id);
+              return next;
+            });
           }}
         />
       )}
