@@ -5,15 +5,14 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { Chatbot } from "@/components/Chatbot";
 import { AmenitiesSection } from "@/components/AmenitiesSection";
 import { blocks } from "@/data/blocks";
-import hero1 from "@/assets/hero-building.jpg";
-import hero2 from "@/assets/hero-building-2.jpg";
-import hero3 from "@/assets/hero-building-3.jpg";
+import hero1 from "@/assets/hero-real-1.png";
+import hero2 from "@/assets/hero-real-2.png";
 
 export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const heroSlides = [hero1, hero2, hero3];
+const heroSlides = [hero1, hero2];
 
 function Hero() {
   const [active, setActive] = useState(0);
@@ -71,19 +70,13 @@ function Hero() {
             A comfortable, secure & student-friendly living experience.
           </p>
 
-          <div className="mt-8 sm:mt-10 flex flex-wrap items-center justify-center gap-3 animate-hero-fade" style={{ animationDelay: "800ms" }}>
+          <div className="mt-8 sm:mt-10 flex items-center justify-center animate-hero-fade" style={{ animationDelay: "800ms" }}>
             <a
               href="#blocks"
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-white text-black font-semibold text-sm hover:bg-clay hover:text-white transition-colors"
+              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-white text-black font-semibold text-sm hover:bg-clay hover:text-white transition-colors"
             >
               Explore Blocks
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-            </a>
-            <a
-              href="tel:+919449510381"
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full border border-white/40 text-white font-semibold text-sm hover:bg-white/10 transition-colors backdrop-blur"
-            >
-              Book a visit
             </a>
           </div>
         </div>
@@ -167,7 +160,10 @@ function Index() {
                   <div className="absolute bottom-0 left-0 right-0 p-5 text-white">
                     <div className="text-[11px] uppercase tracking-[0.2em] opacity-80">{b.tag}</div>
                     <div className="font-display font-bold text-2xl mt-0.5">{b.name}</div>
-                    <p className="text-sm opacity-90 mt-1.5 line-clamp-2">{b.description}</p>
+                    <div className="mt-2 flex items-start gap-1.5 text-xs opacity-90">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mt-0.5 shrink-0"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                      <span className="leading-snug line-clamp-2">{b.location}</span>
+                    </div>
                     <div className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium">
                       View rooms
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" className="transition-transform group-hover:translate-x-1"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
