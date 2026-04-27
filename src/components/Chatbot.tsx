@@ -4,20 +4,15 @@ type Msg = { from: "bot" | "user"; text: string };
 
 const QUICK = [
   "Room availability?",
-  "What's the rent?",
-  "Visiting hours?",
-  "Food included?",
+  "What's the fee per annum?",
 ];
 
 function answer(q: string): string {
   const s = q.toLowerCase();
   if (s.includes("avail") || s.includes("room")) return "Block A has 3 rooms left, Block B has 5, Block C has 2. Tap any block to see room cards.";
-  if (s.includes("rent") || s.includes("price") || s.includes("cost")) return "Single ₹9,500 • Double ₹7,500 • Triple ₹6,500 per month — meals included.";
-  if (s.includes("food") || s.includes("meal")) return "Yes! 3 home-style meals daily — breakfast, lunch and dinner.";
-  if (s.includes("visit")) return "Visitors are welcome in the lounge area between 10 AM – 8 PM.";
-  if (s.includes("wifi")) return "Free high-speed WiFi across all blocks, 24×7.";
+  if (s.includes("fee") || s.includes("rent") || s.includes("price") || s.includes("cost") || s.includes("annum")) return "₹1,35,000 per annum for both 2-sharing and 3-sharing rooms.";
   if (s.includes("location") || s.includes("where")) return "Avalahalli Village, Yelahanka, Bangalore — close to BMSIT College.";
-  return "I can help with rooms, rent, food, visiting hours and amenities. Try one of the quick questions below 👇";
+  return "I can help with rooms and fees. Try one of the quick questions below 👇";
 }
 
 export function Chatbot() {
