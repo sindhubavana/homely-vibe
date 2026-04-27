@@ -26,6 +26,7 @@ export type Block = {
   audience: "Girls" | "Boys";
   image: string;
   location: string;
+  mapQuery: string;
   available: number;
   description: string;
   pricing: { type: Sharing; price: number }[];
