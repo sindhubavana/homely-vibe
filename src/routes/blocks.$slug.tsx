@@ -231,12 +231,12 @@ function ReserveModal({ room, onClose, onConfirm }: { room: Room; onClose: () =>
     setTimeout(() => {
       setSubmitting(false);
       setDone(true);
-      setTimeout(() => onConfirm(), 1400);
-    }, 700);
+      onConfirm();
+    }, 600);
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm grid place-items-center p-4 animate-pop-in" onClick={onClose}>
+    <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm grid place-items-center p-4 animate-pop-in" onClick={done ? undefined : onClose}>
       <div onClick={(e) => e.stopPropagation()} className="relative w-full max-w-md rounded-3xl bg-card shadow-float overflow-hidden">
         <button onClick={onClose} aria-label="Close" className="absolute top-3 right-3 z-10 h-9 w-9 rounded-full bg-background/90 grid place-items-center hover:scale-105 transition-transform">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
@@ -247,8 +247,16 @@ function ReserveModal({ room, onClose, onConfirm }: { room: Room; onClose: () =>
             <div className="mx-auto mb-4 h-14 w-14 rounded-full bg-sage/30 grid place-items-center">
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
             </div>
-            <h3 className="font-display font-bold text-2xl mb-1">Reserved!</h3>
-            <p className="text-sm text-muted-foreground">Thanks {name.split(" ")[0]} — we'll call you on {mobile} shortly to confirm {room.name}.</p>
+            <h3 className="font-display font-bold text-2xl mb-2">Thank you!</h3>
+            <p className="text-base text-foreground">Room is reserved.</p>
+            <p className="text-xs text-muted-foreground mt-2">{room.name} · {room.type}</p>
+            <button
+              type="button"
+              onClick={onClose}
+              className="mt-6 inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-2xl border border-border bg-background text-sm font-medium hover:bg-muted transition-colors"
+            >
+              Close
+            </button>
           </div>
         ) : (
           <form onSubmit={submit} className="p-6">
