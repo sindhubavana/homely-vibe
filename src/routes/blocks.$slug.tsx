@@ -2,6 +2,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useState } from "react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
+import { SingleMap } from "@/components/MapEmbed";
 import { getBlock, type Room } from "@/data/blocks";
 
 export const Route = createFileRoute("/blocks/$slug")({
