@@ -8,9 +8,7 @@ import roomSingle from "@/assets/room-single.jpg";
 import roomDouble from "@/assets/room-double.jpg";
 import roomTriple from "@/assets/room-triple.jpg";
 import food from "@/assets/amenity-food.jpg";
-import wifi from "@/assets/amenity-wifi.jpg";
-import corridor1 from "@/assets/corridor-1.jpg";
-import corridor2 from "@/assets/corridor-2.jpg";
+import roomDoor from "@/assets/pg-room-door.png";
 import buildingExterior from "@/assets/pg-building-exterior.png";
 import reception from "@/assets/pg-reception.png";
 import diningHall from "@/assets/pg-dining-hall.png";
@@ -40,9 +38,7 @@ const photos = [
   { src: roomDouble, label: "Double sharing" },
   { src: roomTriple, label: "Triple sharing" },
   { src: food, label: "Home-style meals" },
-  { src: wifi, label: "High-speed Wi-Fi" },
-  { src: corridor1, label: "Bright corridor" },
-  { src: corridor2, label: "Evening corridor" },
+  { src: roomDoor, label: "Room entrance" },
   { src: buildingExterior, label: "Building exterior" },
   { src: reception, label: "Reception desk" },
   { src: diningHall, label: "Dining hall" },
