@@ -60,8 +60,8 @@ export const blocks: Block[] = [
     tag: "Premium Girls Accommodation",
     audience: "Girls",
     image: blockA,
-    location: "Sri Saila Nilaya, Yelahanka New Town, Bengaluru",
-    mapQuery: "Sri Saila Nilaya Avalahalli Yelahanka Bangalore 560064",
+    location: "Om Sai Luxury Ladies PG, Bengaluru, Karnataka 560119",
+    mapQuery: "Om Sai Luxury Ladies PG Bengaluru 560119",
     available: 12,
     description: "Our flagship block with bright glass-front lounges and study spaces.",
     pricing: [
@@ -76,8 +76,8 @@ export const blocks: Block[] = [
     tag: "Premium Girls Accommodation",
     audience: "Girls",
     image: blockB,
-    location: "Sri Shyla Nilaya, Yelahanka, Bengaluru",
-    mapQuery: "Sri Shyla Nilaya Yelahanka Bangalore",
+    location: "Om Sai Luxury Ladies PG, Bengaluru, Karnataka 560119",
+    mapQuery: "Om Sai Luxury Ladies PG Bengaluru 560119",
     available: 8,
     description: "Quiet residential block with garden seating and dedicated study corners.",
     pricing: [
@@ -92,8 +92,8 @@ export const blocks: Block[] = [
     tag: "Premium Girls Accommodation",
     audience: "Girls",
     image: blockC,
-    location: "Vista #44, Yelahanka, Bengaluru",
-    mapQuery: "Vista 44 Yelahanka Bangalore",
+    location: "Om Sai Luxury Ladies PG, Bengaluru, Karnataka 560119",
+    mapQuery: "Om Sai Luxury Ladies PG Bengaluru 560119",
     available: 6,
     description: "Modern high-rise block with balcony rooms and the best skyline views.",
     pricing: [
