@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as RulesRouteImport } from './routes/rules'
+import { Route as NearbyRouteImport } from './routes/nearby'
 import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as FacilitiesRouteImport } from './routes/facilities'
 import { Route as ContactRouteImport } from './routes/contact'
@@ -19,6 +20,11 @@ import { Route as BlocksSlugRouteImport } from './routes/blocks.$slug'
 const RulesRoute = RulesRouteImport.update({
   id: '/rules',
   path: '/rules',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NearbyRoute = NearbyRouteImport.update({
+  id: '/nearby',
+  path: '/nearby',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GalleryRoute = GalleryRouteImport.update({
@@ -52,6 +58,7 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/facilities': typeof FacilitiesRoute
   '/gallery': typeof GalleryRoute
+  '/nearby': typeof NearbyRoute
   '/rules': typeof RulesRoute
   '/blocks/$slug': typeof BlocksSlugRoute
 }
@@ -60,6 +67,7 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/facilities': typeof FacilitiesRoute
   '/gallery': typeof GalleryRoute
+  '/nearby': typeof NearbyRoute
   '/rules': typeof RulesRoute
   '/blocks/$slug': typeof BlocksSlugRoute
 }
@@ -69,6 +77,7 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/facilities': typeof FacilitiesRoute
   '/gallery': typeof GalleryRoute
+  '/nearby': typeof NearbyRoute
   '/rules': typeof RulesRoute
   '/blocks/$slug': typeof BlocksSlugRoute
 }
@@ -79,16 +88,25 @@ export interface FileRouteTypes {
     | '/contact'
     | '/facilities'
     | '/gallery'
+    | '/nearby'
     | '/rules'
     | '/blocks/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/contact' | '/facilities' | '/gallery' | '/rules' | '/blocks/$slug'
+  to:
+    | '/'
+    | '/contact'
+    | '/facilities'
+    | '/gallery'
+    | '/nearby'
+    | '/rules'
+    | '/blocks/$slug'
   id:
     | '__root__'
     | '/'
     | '/contact'
     | '/facilities'
     | '/gallery'
+    | '/nearby'
     | '/rules'
     | '/blocks/$slug'
   fileRoutesById: FileRoutesById
@@ -98,6 +116,7 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   FacilitiesRoute: typeof FacilitiesRoute
   GalleryRoute: typeof GalleryRoute
+  NearbyRoute: typeof NearbyRoute
   RulesRoute: typeof RulesRoute
   BlocksSlugRoute: typeof BlocksSlugRoute
 }
@@ -109,6 +128,13 @@ declare module '@tanstack/react-router' {
       path: '/rules'
       fullPath: '/rules'
       preLoaderRoute: typeof RulesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/nearby': {
+      id: '/nearby'
+      path: '/nearby'
+      fullPath: '/nearby'
+      preLoaderRoute: typeof NearbyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/gallery': {
@@ -154,6 +180,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   FacilitiesRoute: FacilitiesRoute,
   GalleryRoute: GalleryRoute,
+  NearbyRoute: NearbyRoute,
   RulesRoute: RulesRoute,
   BlocksSlugRoute: BlocksSlugRoute,
 }
