@@ -11,6 +11,16 @@ import food from "@/assets/amenity-food.jpg";
 import wifi from "@/assets/amenity-wifi.jpg";
 import corridor1 from "@/assets/corridor-1.jpg";
 import corridor2 from "@/assets/corridor-2.jpg";
+import buildingExterior from "@/assets/pg-building-exterior.png";
+import reception from "@/assets/pg-reception.png";
+import diningHall from "@/assets/pg-dining-hall.png";
+import kitchenServery from "@/assets/pg-kitchen-servery.png";
+import washingArea from "@/assets/pg-washing-area.png";
+import utensilsRack from "@/assets/pg-utensils-rack.png";
+import refrigerator from "@/assets/pg-refrigerator.png";
+import lift from "@/assets/pg-lift.png";
+import corridorRooms from "@/assets/pg-corridor-rooms.png";
+import shoeRack from "@/assets/pg-shoe-rack.png";
 
 export const Route = createFileRoute("/gallery")({
   component: GalleryPage,
@@ -33,6 +43,16 @@ const photos = [
   { src: wifi, label: "High-speed Wi-Fi" },
   { src: corridor1, label: "Bright corridor" },
   { src: corridor2, label: "Evening corridor" },
+  { src: buildingExterior, label: "Building exterior" },
+  { src: reception, label: "Reception desk" },
+  { src: diningHall, label: "Dining hall" },
+  { src: kitchenServery, label: "Kitchen & servery" },
+  { src: washingArea, label: "Hand wash area" },
+  { src: utensilsRack, label: "Utensils rack" },
+  { src: refrigerator, label: "Refrigerator" },
+  { src: lift, label: "Lift access" },
+  { src: corridorRooms, label: "Room corridor" },
+  { src: shoeRack, label: "Shoe rack" },
 ];
 
 function GalleryPage() {
