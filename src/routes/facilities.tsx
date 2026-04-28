@@ -1,13 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
-import dining from "@/assets/facility-dining.jpg";
-import food from "@/assets/facility-food.jpg";
-import washing from "@/assets/facility-washing.jpg";
-import hotwater from "@/assets/facility-hotwater.jpg";
-import wifi from "@/assets/facility-wifi.jpg";
 import power from "@/assets/facility-power.jpg";
-import cctv from "@/assets/facility-cctv.jpg";
 import study from "@/assets/facility-study.jpg";
 import waterTank from "@/assets/facility-water-tank.png";
 import terraceDrying from "@/assets/facility-terrace-drying.png";
