@@ -8,7 +8,6 @@ const DEFAULT_MAPS: MapItem[] = [
     label: "OM SAI PG",
     embedSrc: OM_SAI_EMBED,
     address: "Om Sai Luxury Ladies PG, Bengaluru, Karnataka 560119",
-    fallbackUrl: "https://www.google.com/maps/place/Om+Sai+Luxury+Ladies+PG",
   },
 ];
 
@@ -42,9 +41,9 @@ export function MapEmbed({
 }
 
 export function SingleMap({ item }: { item: MapItem }) {
-  const fallback =
-    item.fallbackUrl ||
-    `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.address)}`;
+  const externalUrl = item.fallbackUrl
+    ? item.fallbackUrl
+    : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent("OM SAI PG Yelahanka Bangalore")}`;
   return (
     <div className="rounded-2xl overflow-hidden shadow-card border border-border bg-card">
       <div className="px-4 py-3 border-b border-border">
@@ -63,12 +62,12 @@ export function SingleMap({ item }: { item: MapItem }) {
       />
       <div className="p-3 border-t border-border">
         <a
-          href={fallback}
+          href={externalUrl}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center justify-center w-full px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-semibold hover:opacity-90 transition"
         >
-          View Location on Google Maps
+          Open in Maps
         </a>
       </div>
     </div>
