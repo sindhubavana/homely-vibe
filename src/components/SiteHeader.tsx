@@ -90,8 +90,8 @@ export function SiteHeader() {
           </nav>
         </div>
       )}
-    </header>
-    <SearchDialog open={searchOpen} onClose={() => setSearchOpen(false)} />
+      </header>
+      <SearchDialog open={searchOpen} onClose={() => setSearchOpen(false)} />
     </>
   );
 }
