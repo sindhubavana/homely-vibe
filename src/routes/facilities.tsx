@@ -9,6 +9,14 @@ import wifi from "@/assets/facility-wifi.jpg";
 import power from "@/assets/facility-power.jpg";
 import cctv from "@/assets/facility-cctv.jpg";
 import study from "@/assets/facility-study.jpg";
+import waterTank from "@/assets/facility-water-tank.png";
+import terraceDrying from "@/assets/facility-terrace-drying.png";
+import washingMachines from "@/assets/facility-washing-machines.png";
+import wifiRouter from "@/assets/facility-wifi-router.png";
+import roWater from "@/assets/facility-ro-water.png";
+import cctvCamera from "@/assets/facility-cctv-camera.png";
+import fireExtinguisher from "@/assets/facility-fire-extinguisher.png";
+import inductionStove from "@/assets/facility-induction-stove.png";
 
 export const Route = createFileRoute("/facilities")({
   component: FacilitiesPage,
@@ -31,6 +39,14 @@ const facilities = [
   { name: "Power Backup", image: power, desc: "Uninterrupted power for studies, work and comfort." },
   { name: "CCTV Security", image: cctv, desc: "24/7 surveillance covering all entrances and corridors." },
   { name: "Study Area", image: study, desc: "Quiet, well-lit study zones designed for focus." },
+  { name: "Overhead Water Tanks", image: waterTank, desc: "Large rooftop tanks ensure 24/7 water supply." },
+  { name: "Terrace Drying Area", image: terraceDrying, desc: "Open rooftop space for fresh-air clothes drying." },
+  { name: "Premium Washing Machines", image: washingMachines, desc: "Fully automatic Samsung washers for everyday laundry." },
+  { name: "High-Speed WiFi Router", image: wifiRouter, desc: "Dedicated fiber router delivering reliable internet." },
+  { name: "Hot & Cold RO Water", image: roWater, desc: "Commercial RO plant with hot and cold drinking water." },
+  { name: "CCTV Cameras", image: cctvCamera, desc: "HD surveillance cameras across every floor and corridor." },
+  { name: "Fire Safety Equipment", image: fireExtinguisher, desc: "ISI-certified fire extinguishers on every floor." },
+  { name: "Induction Cooktop", image: inductionStove, desc: "Prestige induction stove for safe, quick cooking." },
 ];
 
 function FacilitiesPage() {
