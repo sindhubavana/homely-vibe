@@ -161,7 +161,7 @@ function BlockPage() {
           <div className="mx-auto max-w-6xl px-5">
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary mb-2">Find us</p>
             <h2 className="font-display font-bold text-2xl sm:text-3xl mb-5">{block.name} location</h2>
-            <SingleMap item={{ label: block.name, query: block.mapQuery, address: block.location }} />
+            <SingleMap item={{ label: block.name, embedSrc: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3885.42707869701!2d77.57219789999999!3d13.135439199999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1900036550a9%3A0xb6a1655f92ddcdb8!2sOm%20Sai%20Luxury%20Ladies%20PG!5e0!3m2!1sen!2sin!4v1777381627491!5m2!1sen!2sin", address: block.location }} />
           </div>
         </section>
 

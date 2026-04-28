@@ -157,15 +157,7 @@ function Index() {
           </div>
         </section>
 
-        <MapEmbed
-          heading="Our location"
-          intro="Find us on the map below."
-          items={[{
-            label: "OM SAI PG",
-            query: "Om Sai Luxury Ladies PG Bengaluru 560119",
-            address: "Om Sai Luxury Ladies PG, Bengaluru, Karnataka 560119",
-          }]}
-        />
+        <MapEmbed heading="Our location" intro="Find us on the map below." />
       </main>
       <SiteFooter />
     </div>
