@@ -185,6 +185,10 @@ function BlockPage() {
 }
 
 function RoomCard({ room, reserved, onReserve }: { room: Room; reserved: boolean; onReserve: () => void }) {
+  const capacity = room.type === "3-Sharing" ? 3 : 2;
+  // Simulate baseline + live reservation: each reserved adds 1 member up to capacity
+  const reservedMembers = reserved ? 1 : 0;
+  const memberWord = reservedMembers === 1 ? "member" : "members";
   return (
     <article className="group rounded-2xl bg-background border border-border overflow-hidden hover:shadow-card hover:-translate-y-0.5 transition-all">
       <div className="aspect-[4/3] bg-muted overflow-hidden">
@@ -195,7 +199,11 @@ function RoomCard({ room, reserved, onReserve }: { room: Room; reserved: boolean
           <div className="font-display font-bold text-base leading-none">{room.name}</div>
           <span className="text-[10px] px-2 py-0.5 rounded-full bg-sage/20 text-sage-foreground font-semibold whitespace-nowrap">{room.type}</span>
         </div>
-        
+
+        <div className="mt-2 text-[11px] text-muted-foreground">
+          {reservedMembers} of {capacity} {memberWord} reserved
+        </div>
+
         <button
           onClick={onReserve}
           disabled={reserved}

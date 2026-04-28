@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
+import { SearchDialog } from "@/components/SearchDialog";
 
 const navItems: { to: "/" | "/contact" | "/gallery" | "/facilities" | "/rules"; label: string; exact?: boolean }[] = [
   { to: "/", label: "Home", exact: true },
@@ -11,8 +12,10 @@ const navItems: { to: "/" | "/contact" | "/gallery" | "/facilities" | "/rules"; 
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
 
   return (
+    <>
     <header className="sticky top-0 z-50 backdrop-blur-xl bg-background/80 border-b border-border/60">
       <div className="mx-auto max-w-7xl px-5 h-16 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2.5 group shrink-0">
@@ -42,7 +45,8 @@ export function SiteHeader() {
         <div className="flex items-center gap-2">
           <button
             aria-label="Search"
-            className="hidden sm:grid h-10 w-10 place-items-center rounded-full hover:bg-muted transition-colors"
+            onClick={() => setSearchOpen(true)}
+            className="grid h-10 w-10 place-items-center rounded-full hover:bg-muted transition-colors"
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <circle cx="11" cy="11" r="7" />
@@ -87,5 +91,7 @@ export function SiteHeader() {
         </div>
       )}
     </header>
+    <SearchDialog open={searchOpen} onClose={() => setSearchOpen(false)} />
+    </>
   );
 }
