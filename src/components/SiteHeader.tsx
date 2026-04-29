@@ -7,8 +7,8 @@ const navItems: { to: "/" | "/contact" | "/gallery" | "/facilities" | "/rules" |
   { to: "/facilities", label: "Facilities" },
   { to: "/gallery", label: "Gallery" },
   { to: "/nearby", label: "Nearby" },
-  { to: "/contact", label: "Contact" },
   { to: "/rules", label: "Rules & Regulations" },
+  { to: "/contact", label: "Contact" },
 ];
 
 export function SiteHeader() {

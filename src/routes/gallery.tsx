@@ -4,7 +4,6 @@ import { SiteFooter } from "@/components/SiteFooter";
 import blockA from "@/assets/block-a-entrance.jpg";
 import blockB from "@/assets/block-b-shyla.jpg";
 import blockC from "@/assets/block-c-vista.jpg";
-import roomSingle from "@/assets/room-single.jpg";
 import roomDouble from "@/assets/room-double.jpg";
 import roomTriple from "@/assets/room-triple.jpg";
 import food from "@/assets/amenity-food.jpg";
@@ -34,7 +33,6 @@ const photos = [
   { src: blockA, label: "Block A — Entrance" },
   { src: blockB, label: "Block B — Shyla" },
   { src: blockC, label: "Block C — Vista" },
-  { src: roomSingle, label: "Single room" },
   { src: roomDouble, label: "Double sharing" },
   { src: roomTriple, label: "Triple sharing" },
   { src: food, label: "Home-style meals" },

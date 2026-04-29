@@ -16,16 +16,16 @@ export const Route = createFileRoute("/nearby")({
 });
 
 const places = [
-  { name: "Village Mart", type: "Supermarket", distance: "2 min walk", icon: ShoppingBasket },
-  { name: "Mini Mart", type: "Daily Essentials", distance: "1 min walk", icon: Store },
+  { name: "Village Mart", type: "Supermarket", distance: "15 min walk", icon: ShoppingBasket },
+  { name: "Mini Mart", type: "Daily Essentials", distance: "5 min walk", icon: Store },
   { name: "Medical Store", type: "Pharmacy", distance: "3 min walk", icon: Pill },
   { name: "Apollo Clinic", type: "Hospital / Clinic", distance: "5 min drive", icon: Hospital },
   { name: "ATM (SBI / HDFC)", type: "Banking", distance: "4 min walk", icon: Banknote },
   { name: "Bus Stop — Yelahanka", type: "Public Transport", distance: "5 min walk", icon: Bus },
-  { name: "Tiffin & Restaurants", type: "Food Outlets", distance: "2 min walk", icon: Utensils },
+  { name: "Tiffin & Restaurants", type: "Food Outlets", distance: "10 min walk", icon: Utensils },
   { name: "Cafés & Bakery", type: "Snacks & Coffee", distance: "5 min walk", icon: Coffee },
-  { name: "Reva University", type: "Educational Institute", distance: "10 min drive", icon: GraduationCap },
-  { name: "Cult Fitness / Gym", type: "Fitness Centre", distance: "7 min walk", icon: Dumbbell },
+  { name: "Reva University", type: "Educational Institute", distance: "30 min drive", icon: GraduationCap },
+  { name: "Cult Fitness / Gym", type: "Fitness Centre", distance: "15 min walk", icon: Dumbbell },
   { name: "Cross Pharmacy", type: "24x7 Medical", distance: "6 min walk", icon: Cross },
 ];
 
