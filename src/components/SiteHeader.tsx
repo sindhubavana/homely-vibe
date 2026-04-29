@@ -55,9 +55,6 @@ export function SiteHeader() {
               <path d="m20 20-3.5-3.5" />
             </svg>
           </button>
-          <a href="tel:+919449510381" className="hidden sm:inline-flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-full bg-foreground text-background hover:opacity-90 transition-opacity">
-            Call us
-          </a>
           <button
             aria-label="Toggle menu"
             onClick={() => setOpen((v) => !v)}
