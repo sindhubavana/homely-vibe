@@ -45,6 +45,20 @@ function RulesPage() {
             </div>
           ))}
         </div>
+
+        <section className="mt-14">
+          <h2 className="font-display font-bold text-2xl sm:text-3xl tracking-tight mb-6 text-center">Official Notices</h2>
+          <div className="grid sm:grid-cols-2 gap-6">
+            <figure className="rounded-3xl overflow-hidden border border-border bg-card shadow-soft">
+              <img src={rulesBoard} alt="Hostel rules and regulations notice" loading="lazy" className="w-full h-auto object-contain" />
+              <figcaption className="p-4 text-sm text-muted-foreground text-center">Hostel Rules & Regulations</figcaption>
+            </figure>
+            <figure className="rounded-3xl overflow-hidden border border-border bg-card shadow-soft">
+              <img src={rulesTimings} alt="Hostel gate and mess timings" loading="lazy" className="w-full h-auto object-contain" />
+              <figcaption className="p-4 text-sm text-muted-foreground text-center">Gate & Mess Timings</figcaption>
+            </figure>
+          </div>
+        </section>
       </main>
       <SiteFooter />
     </div>
