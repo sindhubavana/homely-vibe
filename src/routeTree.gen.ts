@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as RulesRouteImport } from './routes/rules'
+import { Route as OverviewRouteImport } from './routes/overview'
 import { Route as NearbyRouteImport } from './routes/nearby'
 import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as FacilitiesRouteImport } from './routes/facilities'
@@ -20,6 +21,11 @@ import { Route as BlocksSlugRouteImport } from './routes/blocks.$slug'
 const RulesRoute = RulesRouteImport.update({
   id: '/rules',
   path: '/rules',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OverviewRoute = OverviewRouteImport.update({
+  id: '/overview',
+  path: '/overview',
   getParentRoute: () => rootRouteImport,
 } as any)
 const NearbyRoute = NearbyRouteImport.update({
@@ -59,6 +65,7 @@ export interface FileRoutesByFullPath {
   '/facilities': typeof FacilitiesRoute
   '/gallery': typeof GalleryRoute
   '/nearby': typeof NearbyRoute
+  '/overview': typeof OverviewRoute
   '/rules': typeof RulesRoute
   '/blocks/$slug': typeof BlocksSlugRoute
 }
@@ -68,6 +75,7 @@ export interface FileRoutesByTo {
   '/facilities': typeof FacilitiesRoute
   '/gallery': typeof GalleryRoute
   '/nearby': typeof NearbyRoute
+  '/overview': typeof OverviewRoute
   '/rules': typeof RulesRoute
   '/blocks/$slug': typeof BlocksSlugRoute
 }
@@ -78,6 +86,7 @@ export interface FileRoutesById {
   '/facilities': typeof FacilitiesRoute
   '/gallery': typeof GalleryRoute
   '/nearby': typeof NearbyRoute
+  '/overview': typeof OverviewRoute
   '/rules': typeof RulesRoute
   '/blocks/$slug': typeof BlocksSlugRoute
 }
@@ -89,6 +98,7 @@ export interface FileRouteTypes {
     | '/facilities'
     | '/gallery'
     | '/nearby'
+    | '/overview'
     | '/rules'
     | '/blocks/$slug'
   fileRoutesByTo: FileRoutesByTo
@@ -98,6 +108,7 @@ export interface FileRouteTypes {
     | '/facilities'
     | '/gallery'
     | '/nearby'
+    | '/overview'
     | '/rules'
     | '/blocks/$slug'
   id:
@@ -107,6 +118,7 @@ export interface FileRouteTypes {
     | '/facilities'
     | '/gallery'
     | '/nearby'
+    | '/overview'
     | '/rules'
     | '/blocks/$slug'
   fileRoutesById: FileRoutesById
@@ -117,6 +129,7 @@ export interface RootRouteChildren {
   FacilitiesRoute: typeof FacilitiesRoute
   GalleryRoute: typeof GalleryRoute
   NearbyRoute: typeof NearbyRoute
+  OverviewRoute: typeof OverviewRoute
   RulesRoute: typeof RulesRoute
   BlocksSlugRoute: typeof BlocksSlugRoute
 }
@@ -128,6 +141,13 @@ declare module '@tanstack/react-router' {
       path: '/rules'
       fullPath: '/rules'
       preLoaderRoute: typeof RulesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/overview': {
+      id: '/overview'
+      path: '/overview'
+      fullPath: '/overview'
+      preLoaderRoute: typeof OverviewRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/nearby': {
@@ -181,6 +201,7 @@ const rootRouteChildren: RootRouteChildren = {
   FacilitiesRoute: FacilitiesRoute,
   GalleryRoute: GalleryRoute,
   NearbyRoute: NearbyRoute,
+  OverviewRoute: OverviewRoute,
   RulesRoute: RulesRoute,
   BlocksSlugRoute: BlocksSlugRoute,
 }
