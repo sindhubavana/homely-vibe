@@ -15,14 +15,20 @@ const heroSlides = [hero1, hero2];
 
 function Hero() {
   const [active, setActive] = useState(0);
+  const [showOverview, setShowOverview] = useState(false);
 
   useEffect(() => {
     const t = setInterval(() => setActive((i) => (i + 1) % heroSlides.length), 6000);
     return () => clearInterval(t);
   }, []);
 
-  const go = (dir: -1 | 1) =>
-    setActive((i) => (i + dir + heroSlides.length) % heroSlides.length);
+  const go = (dir: -1 | 1) => {
+    if (dir === 1) {
+      setShowOverview(true);
+    } else {
+      setShowOverview(false);
+    }
+  };
 
   return (
     <section className="relative h-[calc(100svh-4rem)] min-h-[560px] w-full overflow-hidden bg-black">
