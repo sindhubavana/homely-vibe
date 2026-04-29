@@ -22,14 +22,12 @@ export const Route = createFileRoute("/rules")({
 });
 
 const rules = [
-  { title: "Entry & timings", body: "Main gate closes at 9:30 PM. Late entries with prior intimation only." },
+  { title: "Entry & timings", body: "Main gate closes at 7:30 PM. Late entries with prior intimation only." },
   { title: "Visitors", body: "Guests are welcome in the common visiting area, between 10 AM and 7 PM." },
   { title: "Quiet hours", body: "Please keep noise low between 10 PM and 7 AM out of respect for everyone." },
   { title: "Cleanliness", body: "Keep your room and shared spaces tidy. Housekeeping covers common areas daily." },
   { title: "Food & kitchen", body: "Meals are served in the dining hall. Cooking inside rooms is not permitted." },
   { title: "Safety", body: "CCTV is active 24×7. Please carry your ID and report any concerns to the warden." },
-  { title: "Payments", body: "Rent is due by the 5th of every month. Receipts are shared digitally." },
-  { title: "Notice period", body: "A 30-day notice is required when vacating. Security deposit refunded after handover." },
 ];
 
 function RulesPage() {
