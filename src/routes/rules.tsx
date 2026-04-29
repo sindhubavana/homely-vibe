@@ -1,8 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import rulesBoard from "@/assets/rules-board.png";
 import rulesTimings from "@/assets/rules-timings.png";
+
+const notices = [
+  { src: rulesBoard, alt: "Hostel rules and regulations notice", caption: "Hostel Rules & Regulations" },
+  { src: rulesTimings, alt: "Hostel gate and mess timings", caption: "Gate & Mess Timings" },
+];
 
 export const Route = createFileRoute("/rules")({
   component: RulesPage,
@@ -26,6 +33,11 @@ const rules = [
 ];
 
 function RulesPage() {
+  const [index, setIndex] = useState(0);
+  const current = notices[index];
+  const prev = () => setIndex((i) => (i - 1 + notices.length) % notices.length);
+  const next = () => setIndex((i) => (i + 1) % notices.length);
+
   return (
     <div className="min-h-screen flex flex-col">
       <SiteHeader />
@@ -48,15 +60,43 @@ function RulesPage() {
 
         <section className="mt-14">
           <h2 className="font-display font-bold text-2xl sm:text-3xl tracking-tight mb-6 text-center">Official Notices</h2>
-          <div className="grid sm:grid-cols-2 gap-6">
+          <div className="relative max-w-2xl mx-auto">
             <figure className="rounded-3xl overflow-hidden border border-border bg-card shadow-soft">
-              <img src={rulesBoard} alt="Hostel rules and regulations notice" loading="lazy" className="w-full h-auto object-contain" />
-              <figcaption className="p-4 text-sm text-muted-foreground text-center">Hostel Rules & Regulations</figcaption>
+              <img
+                key={current.src}
+                src={current.src}
+                alt={current.alt}
+                loading="lazy"
+                className="w-full h-auto object-contain animate-pop-in"
+              />
+              <figcaption className="p-4 text-sm text-muted-foreground text-center">{current.caption}</figcaption>
             </figure>
-            <figure className="rounded-3xl overflow-hidden border border-border bg-card shadow-soft">
-              <img src={rulesTimings} alt="Hostel gate and mess timings" loading="lazy" className="w-full h-auto object-contain" />
-              <figcaption className="p-4 text-sm text-muted-foreground text-center">Gate & Mess Timings</figcaption>
-            </figure>
+
+            <button
+              onClick={prev}
+              aria-label="Previous notice"
+              className="absolute left-2 sm:-left-5 top-1/2 -translate-y-1/2 h-11 w-11 rounded-full bg-background/95 border border-border shadow-card grid place-items-center hover:bg-primary hover:text-primary-foreground hover:border-primary transition-colors"
+            >
+              <ChevronLeft className="h-5 w-5" />
+            </button>
+            <button
+              onClick={next}
+              aria-label="Next notice"
+              className="absolute right-2 sm:-right-5 top-1/2 -translate-y-1/2 h-11 w-11 rounded-full bg-background/95 border border-border shadow-card grid place-items-center hover:bg-primary hover:text-primary-foreground hover:border-primary transition-colors"
+            >
+              <ChevronRight className="h-5 w-5" />
+            </button>
+
+            <div className="flex justify-center gap-2 mt-4">
+              {notices.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setIndex(i)}
+                  aria-label={`Show notice ${i + 1}`}
+                  className={`h-2 rounded-full transition-all ${i === index ? "w-6 bg-primary" : "w-2 bg-border"}`}
+                />
+              ))}
+            </div>
           </div>
         </section>
       </main>
