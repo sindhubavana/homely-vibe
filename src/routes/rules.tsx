@@ -1,6 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
+import rulesBoard from "@/assets/rules-board.png";
+import rulesTimings from "@/assets/rules-timings.png";
 
 export const Route = createFileRoute("/rules")({
   component: RulesPage,
