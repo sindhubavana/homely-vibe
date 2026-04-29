@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import blockA from "@/assets/block-a-entrance.jpg";
@@ -50,6 +51,8 @@ const photos = [
 ];
 
 function GalleryPage() {
+  const [lightbox, setLightbox] = useState<{ src: string; label: string } | null>(null);
+
   return (
     <div className="min-h-screen flex flex-col">
       <SiteHeader />
@@ -60,12 +63,41 @@ function GalleryPage() {
         <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 [column-fill:_balance]">
           {photos.map((p, i) => (
             <figure key={i} className="mb-4 break-inside-avoid rounded-3xl overflow-hidden shadow-soft group">
-              <img src={p.src} alt={p.label} loading="lazy" className="w-full h-auto group-hover:scale-105 transition-transform duration-700" />
+              <button
+                type="button"
+                onClick={() => setLightbox(p)}
+                className="block w-full cursor-zoom-in"
+                aria-label={`View ${p.label} fullscreen`}
+              >
+                <img src={p.src} alt={p.label} loading="lazy" className="w-full h-auto group-hover:scale-105 transition-transform duration-700" />
+              </button>
               <figcaption className="px-4 py-3 text-sm font-medium bg-card">{p.label}</figcaption>
             </figure>
           ))}
         </div>
       </main>
+
+      {lightbox && (
+        <div
+          className="fixed inset-0 z-50 bg-black/95 backdrop-blur-sm grid place-items-center p-4 animate-pop-in cursor-zoom-out"
+          onClick={() => setLightbox(null)}
+          role="dialog"
+          aria-modal="true"
+        >
+          <button
+            onClick={() => setLightbox(null)}
+            className="absolute top-4 right-4 h-10 w-10 rounded-full bg-background/90 grid place-items-center hover:scale-105 transition-transform z-10"
+            aria-label="Close"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+          </button>
+          <figure className="max-w-[95vw] max-h-[95vh] flex flex-col items-center gap-3" onClick={(e) => e.stopPropagation()}>
+            <img src={lightbox.src} alt={lightbox.label} className="max-w-full max-h-[85vh] object-contain rounded-2xl shadow-float" />
+            <figcaption className="text-white/90 text-sm font-medium">{lightbox.label}</figcaption>
+          </figure>
+        </div>
+      )}
+
       <SiteFooter />
     </div>
   );

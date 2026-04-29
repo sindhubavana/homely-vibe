@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import power from "@/assets/facility-power.jpg";
@@ -38,6 +39,8 @@ const facilities = [
 ];
 
 function FacilitiesPage() {
+  const [lightbox, setLightbox] = useState<{ image: string; name: string; desc: string } | null>(null);
+
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <SiteHeader />
@@ -65,14 +68,19 @@ function FacilitiesPage() {
                 className="group relative rounded-3xl overflow-hidden bg-card border border-border/60 shadow-soft hover:shadow-xl transition-all duration-500 hover:-translate-y-1.5"
                 style={{ animation: `hero-fade 0.6s ease-out ${i * 0.05}s both` }}
               >
-                <div className="aspect-[4/3] overflow-hidden bg-muted">
+                <button
+                  type="button"
+                  onClick={() => setLightbox(f)}
+                  className="block w-full aspect-[4/3] overflow-hidden bg-muted cursor-zoom-in"
+                  aria-label={`View ${f.name} fullscreen`}
+                >
                   <img
                     src={f.image}
                     alt={f.name}
                     loading="lazy"
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />
-                </div>
+                </button>
                 <div className="p-6 text-center">
                   <h3 className="font-display font-semibold text-xl sm:text-2xl tracking-tight">
                     {f.name}
@@ -84,6 +92,31 @@ function FacilitiesPage() {
           </div>
         </section>
       </main>
+
+      {lightbox && (
+        <div
+          className="fixed inset-0 z-50 bg-black/95 backdrop-blur-sm grid place-items-center p-4 animate-pop-in cursor-zoom-out"
+          onClick={() => setLightbox(null)}
+          role="dialog"
+          aria-modal="true"
+        >
+          <button
+            onClick={() => setLightbox(null)}
+            className="absolute top-4 right-4 h-10 w-10 rounded-full bg-background/90 grid place-items-center hover:scale-105 transition-transform z-10"
+            aria-label="Close"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+          </button>
+          <figure className="max-w-[95vw] max-h-[95vh] flex flex-col items-center gap-3" onClick={(e) => e.stopPropagation()}>
+            <img src={lightbox.image} alt={lightbox.name} className="max-w-full max-h-[85vh] object-contain rounded-2xl shadow-float" />
+            <figcaption className="text-white/90 text-sm font-medium text-center">
+              <div className="font-display font-semibold text-lg">{lightbox.name}</div>
+              <div className="text-white/70 text-xs mt-1">{lightbox.desc}</div>
+            </figcaption>
+          </figure>
+        </div>
+      )}
+
       <SiteFooter />
     </div>
   );
