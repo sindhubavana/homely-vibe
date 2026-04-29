@@ -15,20 +15,14 @@ const heroSlides = [hero1, hero2];
 
 function Hero() {
   const [active, setActive] = useState(0);
-  const [showOverview, setShowOverview] = useState(false);
 
   useEffect(() => {
     const t = setInterval(() => setActive((i) => (i + 1) % heroSlides.length), 6000);
     return () => clearInterval(t);
   }, []);
 
-  const go = (dir: -1 | 1) => {
-    if (dir === 1) {
-      setShowOverview(true);
-    } else {
-      setShowOverview(false);
-    }
-  };
+  const go = (dir: -1 | 1) =>
+    setActive((i) => (i + dir + heroSlides.length) % heroSlides.length);
 
   return (
     <section className="relative h-[calc(100svh-4rem)] min-h-[560px] w-full overflow-hidden bg-black">
@@ -100,29 +94,6 @@ function Hero() {
           />
         ))}
       </div>
-
-      {/* Overview overlay (toggled by right arrow) */}
-      {showOverview && (
-        <div className="absolute inset-0 z-30 flex items-center justify-center px-5 animate-hero-fade">
-          <div className="absolute inset-0 bg-black/75 backdrop-blur-sm" onClick={() => setShowOverview(false)} />
-          <div className="relative max-w-3xl w-full rounded-3xl bg-background/95 p-7 sm:p-10 shadow-float">
-            <button
-              onClick={() => setShowOverview(false)}
-              aria-label="Close overview"
-              className="absolute top-3 right-3 grid h-9 w-9 place-items-center rounded-full hover:bg-muted transition-colors"
-            >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
-            </button>
-            <p className="text-xs tracking-[0.3em] uppercase text-muted-foreground mb-3">Overview</p>
-            <h2 className="font-display font-bold text-2xl sm:text-4xl mb-5">
-              OM SAI PG, Yelahanka
-            </h2>
-            <p className="text-sm sm:text-base text-foreground/85 leading-relaxed">
-              OM SAI PG, Yelahanka is a well-maintained girls' hostel located near BMSIT, offering a comfortable and convenient stay for students and working women. With its prime location, residents have easy access to colleges, markets, and daily essentials. The PG provides a clean, organized, and secure environment that supports a focused and hassle-free lifestyle. It is an ideal choice for those looking for reliable accommodation in Yelahanka.
-            </p>
-          </div>
-        </div>
-      )}
     </section>
   );
 }

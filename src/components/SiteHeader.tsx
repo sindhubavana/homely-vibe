@@ -2,8 +2,9 @@ import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { SearchDialog } from "@/components/SearchDialog";
 
-const navItems: { to: "/" | "/contact" | "/gallery" | "/facilities" | "/rules" | "/nearby"; label: string; exact?: boolean }[] = [
+const navItems: { to: "/" | "/overview" | "/contact" | "/gallery" | "/facilities" | "/rules" | "/nearby"; label: string; exact?: boolean }[] = [
   { to: "/", label: "Home", exact: true },
+  { to: "/overview", label: "Overview" },
   { to: "/facilities", label: "Facilities" },
   { to: "/gallery", label: "Gallery" },
   { to: "/nearby", label: "Nearby" },
