@@ -1,10 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { ChevronLeft, ChevronRight, Clock, Users, Moon, Sparkles, UtensilsCrossed, ShieldCheck } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import rulesBoard from "@/assets/rules-board.png";
 import rulesTimings from "@/assets/rules-timings.png";
+import heroBuilding from "@/assets/hero-building.jpg";
 
 const notices = [
   { src: rulesBoard, alt: "Hostel rules and regulations notice", caption: "Hostel Rules & Regulations" },
@@ -22,12 +23,12 @@ export const Route = createFileRoute("/rules")({
 });
 
 const rules = [
-  { icon: Clock, title: "Entry & timings", body: "Main gate closes at 7:30 PM. Late entries with prior intimation only." },
-  { icon: Users, title: "Visitors", body: "Guests are welcome in the common visiting area, between 10 AM and 7 PM." },
-  { icon: Moon, title: "Quiet hours", body: "Please keep noise low between 10 PM and 7 AM out of respect for everyone." },
-  { icon: Sparkles, title: "Cleanliness", body: "Keep your room and shared spaces tidy. Housekeeping covers common areas daily." },
-  { icon: UtensilsCrossed, title: "Food & kitchen", body: "Meals are served in the dining hall. Cooking inside rooms is not permitted." },
-  { icon: ShieldCheck, title: "Safety", body: "CCTV is active 24×7. Please carry your ID and report any concerns to the warden." },
+  { title: "Entry & timings", body: "Main gate closes at 7:30 PM. Late entries with prior intimation only." },
+  { title: "Visitors", body: "Guests are welcome in the common visiting area, between 10 AM and 7 PM." },
+  { title: "Quiet hours", body: "Please keep noise low between 10 PM and 7 AM out of respect for everyone." },
+  { title: "Cleanliness", body: "Keep your room and shared spaces tidy. Housekeeping covers common areas daily." },
+  { title: "Food & kitchen", body: "Meals are served in the dining hall. Cooking inside rooms is not permitted." },
+  { title: "Safety", body: "CCTV is active 24×7. Please carry your ID and report any concerns to the warden." },
 ];
 
 function RulesPage() {
@@ -40,111 +41,111 @@ function RulesPage() {
     <div className="min-h-screen flex flex-col bg-background">
       <SiteHeader />
       <main className="flex-1">
-        {/* Hero */}
-        <section className="relative overflow-hidden border-b border-border/60">
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-background pointer-events-none" />
-          <div className="absolute -top-24 -right-24 h-72 w-72 rounded-full bg-primary/10 blur-3xl pointer-events-none" />
-          <div className="relative mx-auto max-w-5xl px-5 pt-16 pb-12">
-            <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.22em] text-primary mb-4">
-              <span className="h-px w-8 bg-primary/60" />
-              House guide
-            </div>
-            <h1 className="font-display font-bold text-4xl sm:text-5xl lg:text-6xl tracking-tight leading-[1.05] mb-5">
-              A few simple rules,<br />
-              <span className="italic font-normal text-primary">a lot of comfort.</span>
+        {/* Hero with building background */}
+        <section className="relative h-[340px] sm:h-[420px] overflow-hidden">
+          <img
+            src={heroBuilding}
+            alt="OM SAI PG building"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/45" />
+          <div className="relative h-full flex flex-col items-center justify-center text-center px-5">
+            <h1 className="font-display font-bold text-white text-3xl sm:text-5xl lg:text-6xl tracking-tight drop-shadow-lg">
+              Rules &amp; Regulations of Hostel
             </h1>
-            <p className="text-muted-foreground text-base sm:text-lg max-w-xl leading-relaxed">
-              Think of these less as rules and more as little promises we make to each other —
-              so OM SAI stays safe, calm and feels like home.
+            <p className="mt-4 text-white/90 text-lg sm:text-2xl font-display">
+              OM SAI Luxury Ladies PG, Yelahanka
             </p>
           </div>
         </section>
 
-        {/* Rules grid */}
-        <section className="mx-auto max-w-5xl w-full px-5 py-14">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {rules.map((r, i) => {
-              const Icon = r.icon;
-              return (
-                <article
-                  key={r.title}
-                  className="group relative rounded-2xl bg-card border border-border/70 p-6 hover:border-primary/40 hover:shadow-soft transition-all duration-300"
-                >
-                  <div className="absolute top-5 right-5 text-[11px] font-mono text-muted-foreground/50 tabular-nums">
-                    {String(i + 1).padStart(2, "0")}
-                  </div>
-                  <div className="h-11 w-11 rounded-xl bg-primary/10 text-primary grid place-items-center mb-4 group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-                    <Icon className="h-5 w-5" />
-                  </div>
-                  <h3 className="font-display font-semibold text-lg tracking-tight mb-1.5">
-                    {r.title}
+        {/* Document-style content */}
+        <section className="bg-background">
+          <div className="mx-auto max-w-4xl px-5 sm:px-8 py-14">
+            <div className="bg-card border border-border rounded-lg shadow-card p-6 sm:p-12">
+              <header className="text-center border-b border-border pb-6 mb-8">
+                <h2 className="font-display font-bold text-2xl sm:text-3xl text-foreground">
+                  OM SAI Luxury Ladies PG
+                </h2>
+                <p className="mt-2 text-sm sm:text-base text-muted-foreground">
+                  Yelahanka, Bengaluru &middot; Phone: +91 94495 10381
+                </p>
+                <p className="mt-1 text-sm text-muted-foreground italic">
+                  Rules and Regulations for Residents
+                </p>
+              </header>
+
+              <div className="space-y-8">
+                <div>
+                  <h3 className="font-display font-bold text-xl sm:text-2xl text-primary uppercase tracking-wide mb-4">
+                    General
                   </h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{r.body}</p>
-                </article>
-              );
-            })}
-          </div>
+                  <ul className="space-y-3 list-disc pl-6 marker:text-primary text-foreground/85 leading-relaxed">
+                    {rules.map((r) => (
+                      <li key={r.title}>
+                        <span className="font-semibold text-foreground">{r.title}.</span>{" "}
+                        {r.body}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
 
-          {/* Hand-written aside */}
-          <div className="mt-10 rounded-2xl border border-dashed border-primary/30 bg-primary/5 p-5 sm:p-6 flex items-start gap-4">
-            <div className="h-10 w-10 rounded-full bg-primary/15 text-primary grid place-items-center shrink-0 font-display font-bold">
-              !
-            </div>
-            <p className="text-sm sm:text-[15px] text-foreground/80 leading-relaxed">
-              <span className="font-semibold text-foreground">A note from the warden — </span>
-              if anything ever feels unclear or uncomfortable, please come talk to us.
-              We'd much rather hear it directly than leave you wondering.
-            </p>
-          </div>
-        </section>
+                <div className="border-l-4 border-primary/60 bg-primary/5 p-5 rounded-r-md">
+                  <p className="text-sm sm:text-[15px] text-foreground/85 leading-relaxed">
+                    <span className="font-semibold text-foreground">A note from the warden — </span>
+                    if anything ever feels unclear or uncomfortable, please come talk to us.
+                    We'd much rather hear it directly than leave you wondering.
+                  </p>
+                </div>
+              </div>
 
-        {/* Notices */}
-        <section className="border-t border-border/60 bg-muted/30">
-          <div className="mx-auto max-w-3xl px-5 py-14">
-            <div className="text-center mb-8">
-              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary mb-2">From our notice board</p>
-              <h2 className="font-display font-bold text-2xl sm:text-3xl tracking-tight">Official notices</h2>
-            </div>
+              {/* Notice board */}
+              <div className="mt-12 pt-10 border-t border-border">
+                <h3 className="font-display font-bold text-xl sm:text-2xl text-primary uppercase tracking-wide text-center mb-6">
+                  Official Notices
+                </h3>
 
-            <div className="relative">
-              <figure className="rounded-3xl overflow-hidden border border-border bg-card shadow-soft">
-                <img
-                  key={current.src}
-                  src={current.src}
-                  alt={current.alt}
-                  loading="lazy"
-                  className="w-full h-auto object-contain animate-pop-in"
-                />
-                <figcaption className="p-4 text-sm text-muted-foreground text-center border-t border-border/60">
-                  {current.caption}
-                </figcaption>
-              </figure>
+                <div className="relative">
+                  <figure className="rounded-md overflow-hidden border border-border bg-muted/30">
+                    <img
+                      key={current.src}
+                      src={current.src}
+                      alt={current.alt}
+                      loading="lazy"
+                      className="w-full h-auto object-contain animate-pop-in"
+                    />
+                    <figcaption className="p-4 text-sm text-muted-foreground text-center border-t border-border">
+                      {current.caption}
+                    </figcaption>
+                  </figure>
 
-              <button
-                onClick={prev}
-                aria-label="Previous notice"
-                className="absolute left-2 sm:-left-5 top-1/2 -translate-y-1/2 h-11 w-11 rounded-full bg-background border border-border shadow-card grid place-items-center hover:bg-primary hover:text-primary-foreground hover:border-primary transition-colors"
-              >
-                <ChevronLeft className="h-5 w-5" />
-              </button>
-              <button
-                onClick={next}
-                aria-label="Next notice"
-                className="absolute right-2 sm:-right-5 top-1/2 -translate-y-1/2 h-11 w-11 rounded-full bg-background border border-border shadow-card grid place-items-center hover:bg-primary hover:text-primary-foreground hover:border-primary transition-colors"
-              >
-                <ChevronRight className="h-5 w-5" />
-              </button>
-            </div>
+                  <button
+                    onClick={prev}
+                    aria-label="Previous notice"
+                    className="absolute left-2 sm:-left-5 top-1/2 -translate-y-1/2 h-11 w-11 rounded-full bg-foreground/70 text-background grid place-items-center hover:bg-foreground transition-colors"
+                  >
+                    <ChevronLeft className="h-5 w-5" />
+                  </button>
+                  <button
+                    onClick={next}
+                    aria-label="Next notice"
+                    className="absolute right-2 sm:-right-5 top-1/2 -translate-y-1/2 h-11 w-11 rounded-full bg-foreground/70 text-background grid place-items-center hover:bg-foreground transition-colors"
+                  >
+                    <ChevronRight className="h-5 w-5" />
+                  </button>
+                </div>
 
-            <div className="flex justify-center gap-2 mt-5">
-              {notices.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setIndex(i)}
-                  aria-label={`Show notice ${i + 1}`}
-                  className={`h-2 rounded-full transition-all ${i === index ? "w-6 bg-primary" : "w-2 bg-border"}`}
-                />
-              ))}
+                <div className="flex justify-center gap-2 mt-5">
+                  {notices.map((_, i) => (
+                    <button
+                      key={i}
+                      onClick={() => setIndex(i)}
+                      aria-label={`Show notice ${i + 1}`}
+                      className={`h-2 rounded-full transition-all ${i === index ? "w-6 bg-primary" : "w-2 bg-border"}`}
+                    />
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -153,3 +154,4 @@ function RulesPage() {
     </div>
   );
 }
+
