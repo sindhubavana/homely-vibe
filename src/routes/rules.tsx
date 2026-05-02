@@ -5,7 +5,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import rulesBoard from "@/assets/rules-board.png";
 import rulesTimings from "@/assets/rules-timings.png";
-import heroBuilding from "@/assets/hero-building.jpg";
+import heroBuilding from "@/assets/rules-hero-building.jpg";
 
 const notices = [
   { src: rulesBoard, alt: "Hostel rules and regulations notice", caption: "Hostel Rules & Regulations" },
