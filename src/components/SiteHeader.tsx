@@ -21,8 +21,8 @@ export function SiteHeader() {
     <header className="sticky top-0 z-50 backdrop-blur-xl bg-background/80 border-b border-border/60">
       <div className="mx-auto max-w-7xl px-5 h-16 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2.5 group shrink-0">
-          <div className="h-9 w-9 rounded-2xl bg-primary text-primary-foreground grid place-items-center font-display font-bold text-lg shadow-soft transition-transform group-hover:scale-105">
-            ॐ
+          <div className="h-9 w-9 rounded-2xl bg-primary text-primary-foreground grid place-items-center font-display font-bold text-sm shadow-soft transition-transform group-hover:scale-105 tracking-tight">
+            OS
           </div>
           <div className="leading-tight">
             <div className="font-display font-bold text-[15px] tracking-tight">OM SAI</div>

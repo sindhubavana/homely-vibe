@@ -4,7 +4,7 @@ export function SiteFooter() {
       <div className="mx-auto max-w-6xl px-5 py-10 grid sm:grid-cols-3 gap-8">
         <div>
           <div className="flex items-center gap-2.5 mb-3">
-            <div className="h-9 w-9 rounded-2xl bg-primary text-primary-foreground grid place-items-center font-display font-bold">ॐ</div>
+            <div className="h-9 w-9 rounded-2xl bg-primary text-primary-foreground grid place-items-center font-display font-bold text-sm">OS</div>
             <div className="font-display font-bold">OM SAI Luxury Ladies PG</div>
           </div>
           
