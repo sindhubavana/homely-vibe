@@ -26,7 +26,7 @@ export const Route = createFileRoute("/facilities")({
 });
 
 const facilities = [
-  { name: "Premium Washing Machines", image: washingMachines, desc: "Fully automatic Samsung washers for everyday laundry." },
+  { name: "Washing Machines", image: washingMachines, desc: "Fully automatic Samsung washers for everyday laundry." },
   { name: "Hot & Cold RO Water", image: roWater, desc: "Commercial RO plant with hot and cold drinking water." },
   { name: "High-Speed WiFi Router", image: wifiRouter, desc: "Dedicated fiber router delivering reliable internet across all rooms." },
   { name: "CCTV Surveillance", image: cctvCamera, desc: "HD surveillance cameras across every floor and corridor." },
