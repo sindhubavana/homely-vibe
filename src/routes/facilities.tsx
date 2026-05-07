@@ -110,6 +110,67 @@ function FacilitiesPage() {
           <div className="mt-6 mx-auto h-px w-16 bg-foreground/30" />
         </section>
 
+        {/* Weekly Food Menu */}
+        <section className="mx-auto max-w-6xl w-full px-5 pb-16">
+          <div className="text-center mb-8">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary mb-2">Dining</p>
+            <h2 className="font-display font-bold text-3xl sm:text-4xl tracking-tight">Weekly Food Menu</h2>
+            <p className="mt-2 text-sm text-muted-foreground max-w-xl mx-auto">
+              A balanced rotation of breakfast, lunch, snacks and dinner — freshly prepared every day.
+            </p>
+          </div>
+
+          <div className="grid gap-4 md:hidden">
+            {weeklyMenu.map((d) => (
+              <article key={d.day} className="rounded-2xl bg-card border border-border/60 shadow-soft overflow-hidden">
+                <header className="px-5 py-3 bg-primary text-primary-foreground">
+                  <h3 className="font-display font-semibold text-lg tracking-wide">{d.day}</h3>
+                </header>
+                <dl className="divide-y divide-border/60">
+                  {([
+                    ["Breakfast", d.breakfast],
+                    ["Lunch", d.lunch],
+                    ["Snacks", d.snacks],
+                    ["Dinner", d.dinner],
+                  ] as const).map(([label, value]) => (
+                    <div key={label} className="px-5 py-3">
+                      <dt className="text-[11px] font-semibold uppercase tracking-wider text-primary/80 mb-1">{label}</dt>
+                      <dd className="text-sm text-foreground leading-relaxed">{value}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </article>
+            ))}
+          </div>
+
+          <div className="hidden md:block rounded-3xl border border-border/60 bg-card shadow-soft overflow-hidden">
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead className="bg-muted/60">
+                  <tr className="text-left">
+                    <th className="px-4 py-3 font-display font-semibold text-foreground w-[110px]">Day</th>
+                    <th className="px-4 py-3 font-display font-semibold text-foreground">Breakfast</th>
+                    <th className="px-4 py-3 font-display font-semibold text-foreground">Lunch</th>
+                    <th className="px-4 py-3 font-display font-semibold text-foreground">Snacks</th>
+                    <th className="px-4 py-3 font-display font-semibold text-foreground">Dinner</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {weeklyMenu.map((d, i) => (
+                    <tr key={d.day} className={i % 2 === 1 ? "bg-muted/20" : ""}>
+                      <td className="px-4 py-4 align-top font-semibold text-primary whitespace-nowrap">{d.day}</td>
+                      <td className="px-4 py-4 align-top text-foreground/90 leading-relaxed">{d.breakfast}</td>
+                      <td className="px-4 py-4 align-top text-foreground/90 leading-relaxed">{d.lunch}</td>
+                      <td className="px-4 py-4 align-top text-foreground/90 leading-relaxed">{d.snacks}</td>
+                      <td className="px-4 py-4 align-top text-foreground/90 leading-relaxed">{d.dinner}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
         {/* Grid */}
         <section className="mx-auto max-w-6xl w-full px-5 pb-20">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
