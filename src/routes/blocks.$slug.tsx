@@ -3,7 +3,7 @@ import { useState } from "react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SingleMap } from "@/components/MapEmbed";
-import { getBlock, type Room } from "@/data/blocks";
+import { getBlock, type Room, type Floor } from "@/data/blocks";
 
 export const Route = createFileRoute("/blocks/$slug")({
   loader: ({ params }) => {
