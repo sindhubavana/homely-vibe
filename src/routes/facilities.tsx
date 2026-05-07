@@ -34,7 +34,6 @@ const facilities = [
   { name: "Fire Safety Equipment", image: fireExtinguisher, desc: "ISI-certified fire extinguishers on every floor." },
   { name: "Induction Cooktop", image: inductionStove, desc: "Prestige induction stove for safe, quick cooking." },
   { name: "Power Backup", image: power, desc: "Uninterrupted power for studies, work and comfort." },
-  { name: "Weekly Food Menu", image: menuChart, desc: "Balanced weekly menu with breakfast, lunch, snacks and dinner." },
 ];
 
 const weeklyMenu: { day: string; breakfast: string; lunch: string; snacks: string; dinner: string }[] = [
