@@ -3,7 +3,7 @@ import { useState } from "react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SingleMap } from "@/components/MapEmbed";
-import { getBlock, type Room } from "@/data/blocks";
+import { getBlock, type Room, type Floor } from "@/data/blocks";
 
 export const Route = createFileRoute("/blocks/$slug")({
   loader: ({ params }) => {
@@ -84,17 +84,13 @@ function BlockPage() {
                   <span className="px-2 py-0.5 rounded-full bg-white/20 text-[10px] font-bold uppercase tracking-wider">Per Annum</span>
                 </div>
                 <h2 className="font-display font-bold text-2xl sm:text-3xl mb-5">All-inclusive accommodation</h2>
-                <div className="grid sm:grid-cols-2 gap-3 sm:gap-4">
-                  {block.pricing.map((p) => (
-                    <div key={p.type} className="rounded-2xl bg-white/10 backdrop-blur border border-white/20 p-5 hover:bg-white/15 transition-colors">
-                      <div className="text-xs uppercase tracking-wider opacity-80">{p.type}</div>
-                      <div className="font-display font-bold text-3xl sm:text-4xl mt-1">
-                        ₹{p.price.toLocaleString("en-IN")}
-                        <span className="text-sm font-medium opacity-80"> /year</span>
-                      </div>
-                      <div className="text-xs opacity-80 mt-1.5">All-inclusive accommodation</div>
-                    </div>
-                  ))}
+                <div className="rounded-2xl bg-white/10 backdrop-blur border border-white/20 p-6 sm:p-7 hover:bg-white/15 transition-colors max-w-md">
+                  <div className="text-xs uppercase tracking-wider opacity-80">2 &amp; 3 Sharing</div>
+                  <div className="font-display font-bold text-4xl sm:text-5xl mt-1">
+                    ₹1,35,000
+                    <span className="text-base font-medium opacity-80"> /year</span>
+                  </div>
+                  <div className="text-xs opacity-80 mt-2">Same all-inclusive fee for both 2-sharing and 3-sharing rooms</div>
                 </div>
               </div>
             </div>
@@ -116,7 +112,7 @@ function BlockPage() {
             </div>
 
             <div className="space-y-3">
-              {block.floors.map((floor) => {
+              {block.floors.map((floor: Floor) => {
                 const isOpen = openFloor === floor.number;
                 return (
                   <div key={floor.number} className="rounded-2xl border border-border bg-card shadow-soft overflow-hidden transition-all">
@@ -139,7 +135,7 @@ function BlockPage() {
 
                     {isOpen && (
                       <div className="px-4 sm:px-5 pb-5 pt-1 grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 animate-float-up">
-                        {floor.rooms.map((room) => (
+                        {floor.rooms.map((room: Room) => (
                           <RoomCard
                             key={room.id}
                             room={room}
