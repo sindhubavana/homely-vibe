@@ -112,7 +112,7 @@ function BlockPage() {
             </div>
 
             <div className="space-y-3">
-              {block.floors.map((floor) => {
+              {block.floors.map((floor: Floor) => {
                 const isOpen = openFloor === floor.number;
                 return (
                   <div key={floor.number} className="rounded-2xl border border-border bg-card shadow-soft overflow-hidden transition-all">
@@ -135,7 +135,7 @@ function BlockPage() {
 
                     {isOpen && (
                       <div className="px-4 sm:px-5 pb-5 pt-1 grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 animate-float-up">
-                        {floor.rooms.map((room) => (
+                        {floor.rooms.map((room: Room) => (
                           <RoomCard
                             key={room.id}
                             room={room}
