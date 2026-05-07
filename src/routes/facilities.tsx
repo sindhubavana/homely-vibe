@@ -3,7 +3,6 @@ import { useState } from "react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import power from "@/assets/facility-power.jpg";
-import menuChart from "@/assets/facility-menu.png";
 import waterTank from "@/assets/facility-water-tank.png";
 import terraceDrying from "@/assets/facility-terrace-drying.png";
 import washingMachines from "@/assets/facility-washing-machines.png";
