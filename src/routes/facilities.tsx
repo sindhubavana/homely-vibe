@@ -87,6 +87,7 @@ const weeklyMenu: { day: string; breakfast: string; lunch: string; snacks: strin
     snacks: "Fruits Seasonal & TCM",
     dinner: "Chicken Biryani + Kebab + Veg biryani & Paneer Gravy",
   },
+];
 
 
 function FacilitiesPage() {
