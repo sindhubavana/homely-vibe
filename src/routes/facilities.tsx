@@ -3,7 +3,6 @@ import { useState } from "react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import power from "@/assets/facility-power.jpg";
-import menuChart from "@/assets/facility-menu.png";
 import waterTank from "@/assets/facility-water-tank.png";
 import terraceDrying from "@/assets/facility-terrace-drying.png";
 import washingMachines from "@/assets/facility-washing-machines.png";
@@ -35,8 +34,60 @@ const facilities = [
   { name: "Fire Safety Equipment", image: fireExtinguisher, desc: "ISI-certified fire extinguishers on every floor." },
   { name: "Induction Cooktop", image: inductionStove, desc: "Prestige induction stove for safe, quick cooking." },
   { name: "Power Backup", image: power, desc: "Uninterrupted power for studies, work and comfort." },
-  { name: "Weekly Food Menu", image: menuChart, desc: "Balanced weekly menu with breakfast, lunch, snacks and dinner." },
 ];
+
+const weeklyMenu: { day: string; breakfast: string; lunch: string; snacks: string; dinner: string }[] = [
+  {
+    day: "Monday",
+    breakfast: "Idli, Vada, Sambar, and Chutney",
+    lunch: "Dum aloo & carrot palya",
+    snacks: "French fries, peri peri masala, Tomato sauce, Mayonnaise",
+    dinner: "Chole Masala + Rave unde + Vangi Bath",
+  },
+  {
+    day: "Tuesday",
+    breakfast: "Bisibele bath and Upma with veg",
+    lunch: "Mixed grain curry (lobia, green moong whole, brown channa, green peas) + beetroot palya (Should not use readymade masala)",
+    snacks: "Maggi (TCM)",
+    dinner: "Aloo Capsicum + Egg curry + Pudina Palav + Kulfi/Cone ice cream mini",
+  },
+  {
+    day: "Wednesday",
+    breakfast: "Set dosa, Veg sagu & Chutney",
+    lunch: "Black channa masala & Aloo dry (Bhujia)",
+    snacks: "Pani Puri, mashed masala aloo, sweet water, spicy water, boondi khara",
+    dinner: "Chicken chilly / Chicken curry, Chilly Paneer with Ghee Rice",
+  },
+  {
+    day: "Thursday",
+    breakfast: "Aloo paratha + Dahi + Plain Chutney",
+    lunch: "Rajma and Jerkins kabuli channa",
+    snacks: "Vadapav",
+    dinner: "Cabbage Manchurian / veg kofta gravy + roti + Peas pulav",
+  },
+  {
+    day: "Friday",
+    breakfast: "Bread omlette + Tomato bath",
+    lunch: "Aloo Gobi & Moong",
+    snacks: "Onion Pakoda / Sweet corn",
+    dinner: "Bhindi gravy + Mudde + Bassaru + Soppina palya + Custard",
+  },
+  {
+    day: "Saturday",
+    breakfast: "Rava Idli + Poha namkeen",
+    lunch: "Mushroom pulao raitha, Paneer Butter masala, Gulab jamun",
+    snacks: "Cream Biscuit (Oreo/bourbon) + TCM",
+    dinner: "Puliyogare / Chitranna + Egg burji + White rice, Puri with chole + dal",
+  },
+  {
+    day: "Sunday",
+    breakfast: "Masala Dosa, Shenga chutney and Sambar & Aloo Palya",
+    lunch: "Gobi-Manchurian (Dry) + Cone Ice cream",
+    snacks: "Fruits Seasonal & TCM",
+    dinner: "Chicken Biryani + Kebab + Veg biryani & Paneer Gravy",
+  },
+];
+
 
 function FacilitiesPage() {
   const [lightbox, setLightbox] = useState<{ image: string; name: string; desc: string } | null>(null);
@@ -57,6 +108,67 @@ function FacilitiesPage() {
             Everything you need for comfortable living.
           </p>
           <div className="mt-6 mx-auto h-px w-16 bg-foreground/30" />
+        </section>
+
+        {/* Weekly Food Menu */}
+        <section className="mx-auto max-w-6xl w-full px-5 pb-16">
+          <div className="text-center mb-8">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary mb-2">Dining</p>
+            <h2 className="font-display font-bold text-3xl sm:text-4xl tracking-tight">Weekly Food Menu</h2>
+            <p className="mt-2 text-sm text-muted-foreground max-w-xl mx-auto">
+              A balanced rotation of breakfast, lunch, snacks and dinner — freshly prepared every day.
+            </p>
+          </div>
+
+          <div className="grid gap-4 md:hidden">
+            {weeklyMenu.map((d) => (
+              <article key={d.day} className="rounded-2xl bg-card border border-border/60 shadow-soft overflow-hidden">
+                <header className="px-5 py-3 bg-primary text-primary-foreground">
+                  <h3 className="font-display font-semibold text-lg tracking-wide">{d.day}</h3>
+                </header>
+                <dl className="divide-y divide-border/60">
+                  {([
+                    ["Breakfast", d.breakfast],
+                    ["Lunch", d.lunch],
+                    ["Snacks", d.snacks],
+                    ["Dinner", d.dinner],
+                  ] as const).map(([label, value]) => (
+                    <div key={label} className="px-5 py-3">
+                      <dt className="text-[11px] font-semibold uppercase tracking-wider text-primary/80 mb-1">{label}</dt>
+                      <dd className="text-sm text-foreground leading-relaxed">{value}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </article>
+            ))}
+          </div>
+
+          <div className="hidden md:block rounded-3xl border border-border/60 bg-card shadow-soft overflow-hidden">
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead className="bg-muted/60">
+                  <tr className="text-left">
+                    <th className="px-4 py-3 font-display font-semibold text-foreground w-[110px]">Day</th>
+                    <th className="px-4 py-3 font-display font-semibold text-foreground">Breakfast</th>
+                    <th className="px-4 py-3 font-display font-semibold text-foreground">Lunch</th>
+                    <th className="px-4 py-3 font-display font-semibold text-foreground">Snacks</th>
+                    <th className="px-4 py-3 font-display font-semibold text-foreground">Dinner</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {weeklyMenu.map((d, i) => (
+                    <tr key={d.day} className={i % 2 === 1 ? "bg-muted/20" : ""}>
+                      <td className="px-4 py-4 align-top font-semibold text-primary whitespace-nowrap">{d.day}</td>
+                      <td className="px-4 py-4 align-top text-foreground/90 leading-relaxed">{d.breakfast}</td>
+                      <td className="px-4 py-4 align-top text-foreground/90 leading-relaxed">{d.lunch}</td>
+                      <td className="px-4 py-4 align-top text-foreground/90 leading-relaxed">{d.snacks}</td>
+                      <td className="px-4 py-4 align-top text-foreground/90 leading-relaxed">{d.dinner}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
         </section>
 
         {/* Grid */}
