@@ -37,6 +37,58 @@ const facilities = [
   { name: "Weekly Food Menu", image: menuChart, desc: "Balanced weekly menu with breakfast, lunch, snacks and dinner." },
 ];
 
+const weeklyMenu: { day: string; breakfast: string; lunch: string; snacks: string; dinner: string }[] = [
+  {
+    day: "Monday",
+    breakfast: "Idli, Vada, Sambar, and Chutney",
+    lunch: "Dum aloo & carrot palya",
+    snacks: "French fries, peri peri masala, Tomato sauce, Mayonnaise",
+    dinner: "Chole Masala + Rave unde + Vangi Bath",
+  },
+  {
+    day: "Tuesday",
+    breakfast: "Bisibele bath and Upma with veg",
+    lunch: "Mixed grain curry (lobia, green moong whole, brown channa, green peas) + beetroot palya (Should not use readymade masala)",
+    snacks: "Maggi (TCM)",
+    dinner: "Aloo Capsicum + Egg curry + Pudina Palav + Kulfi/Cone ice cream mini",
+  },
+  {
+    day: "Wednesday",
+    breakfast: "Set dosa, Veg sagu & Chutney",
+    lunch: "Black channa masala & Aloo dry (Bhujia)",
+    snacks: "Pani Puri, mashed masala aloo, sweet water, spicy water, boondi khara",
+    dinner: "Chicken chilly / Chicken curry, Chilly Paneer with Ghee Rice",
+  },
+  {
+    day: "Thursday",
+    breakfast: "Aloo paratha + Dahi + Plain Chutney",
+    lunch: "Rajma and Jerkins kabuli channa",
+    snacks: "Vadapav",
+    dinner: "Cabbage Manchurian / veg kofta gravy + roti + Peas pulav",
+  },
+  {
+    day: "Friday",
+    breakfast: "Bread omlette + Tomato bath",
+    lunch: "Aloo Gobi & Moong",
+    snacks: "Onion Pakoda / Sweet corn",
+    dinner: "Bhindi gravy + Mudde + Bassaru + Soppina palya + Custard",
+  },
+  {
+    day: "Saturday",
+    breakfast: "Rava Idli + Poha namkeen",
+    lunch: "Mushroom pulao raitha, Paneer Butter masala, Gulab jamun",
+    snacks: "Cream Biscuit (Oreo/bourbon) + TCM",
+    dinner: "Puliyogare / Chitranna + Egg burji + White rice, Puri with chole + dal",
+  },
+  {
+    day: "Sunday",
+    breakfast: "Masala Dosa, Shenga chutney and Sambar & Aloo Palya",
+    lunch: "Gobi-Manchurian (Dry) + Cone Ice cream",
+    snacks: "Fruits Seasonal & TCM",
+    dinner: "Chicken Biryani + Kebab + Veg biryani & Paneer Gravy",
+  },
+
+
 function FacilitiesPage() {
   const [lightbox, setLightbox] = useState<{ image: string; name: string; desc: string } | null>(null);
 
