@@ -111,8 +111,18 @@ function BlockPage() {
               </div>
               <div className="grid sm:grid-cols-2 gap-4 sm:gap-5">
                 {[
-                  { title: "2 Sharing Room", subtitle: "Spacious twin layout", image: roomDouble },
-                  { title: "3 Sharing Room", subtitle: "Bright triple layout", image: roomTriple },
+                  {
+                    title: "2 Sharing Room",
+                    subtitle: "Spacious twin layout",
+                    image: roomDouble,
+                    panorama: "https://pannellum.org/images/alma.jpg",
+                  },
+                  {
+                    title: "3 Sharing Room",
+                    subtitle: "Bright triple layout",
+                    image: roomTriple,
+                    panorama: "https://pannellum.org/images/cerro-toco-0.jpg",
+                  },
                 ].map((v) => (
                   <article key={v.title} className="group relative rounded-3xl overflow-hidden border border-border bg-card shadow-card hover:shadow-float hover:-translate-y-0.5 transition-all">
                     <div className="aspect-[16/10] overflow-hidden bg-muted">
@@ -129,7 +139,7 @@ function BlockPage() {
                         <div className="text-xs opacity-85">{v.subtitle}</div>
                       </div>
                       <button
-                        onClick={() => setView360({ title: v.title, image: v.image })}
+                        onClick={() => setView360({ title: v.title, panorama: v.panorama })}
                         className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-white text-foreground text-xs font-semibold hover:scale-105 transition-transform whitespace-nowrap"
                       >
                         Open 360 View
