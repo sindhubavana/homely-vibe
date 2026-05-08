@@ -4,6 +4,8 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SingleMap } from "@/components/MapEmbed";
 import { getBlock, type Room, type Floor } from "@/data/blocks";
+import roomDouble from "@/assets/room-double.jpg";
+import roomTriple from "@/assets/room-triple.jpg";
 
 export const Route = createFileRoute("/blocks/$slug")({
   loader: ({ params }) => {
