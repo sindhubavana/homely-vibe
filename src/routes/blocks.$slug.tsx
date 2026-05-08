@@ -262,8 +262,17 @@ function RoomCard({ room, reserved, onReserve }: { room: Room; reserved: boolean
           <span className="text-[10px] px-2 py-0.5 rounded-full bg-sage/20 text-sage-foreground font-semibold whitespace-nowrap">{room.type}</span>
         </div>
 
-        <div className="mt-2 text-[11px] text-muted-foreground">
-          {reservedMembers} of {capacity} {memberWord} reserved
+        <div className="mt-2 flex items-center gap-1.5">
+          <span className={`h-1.5 w-1.5 rounded-full ${reserved ? "bg-muted-foreground" : "bg-sage"}`} />
+          <span className="text-[11px] font-medium text-muted-foreground">
+            {reserved ? "Reserved" : "Vacant"}
+            <span className="opacity-70"> · {reservedMembers}/{capacity} {memberWord}</span>
+          </span>
+        </div>
+
+        <div className="mt-2 font-display font-bold text-sm text-foreground">
+          ₹{room.rent.toLocaleString("en-IN")}
+          <span className="text-[10px] font-medium text-muted-foreground"> /year</span>
         </div>
 
         <button
