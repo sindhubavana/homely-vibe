@@ -40,6 +40,7 @@ function BlockPage() {
   const [reserved, setReserved] = useState<Set<string>>(new Set());
   const [activeRoom, setActiveRoom] = useState<Room | null>(null);
   const [openFloor, setOpenFloor] = useState<number>(1);
+  const [view360, setView360] = useState<{ title: string; image: string } | null>(null);
 
   const reservedCount = reserved.size;
   const memberLabel = reservedCount === 1 ? "member" : "members";
