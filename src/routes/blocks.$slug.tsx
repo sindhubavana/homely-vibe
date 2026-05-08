@@ -4,6 +4,8 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SingleMap } from "@/components/MapEmbed";
 import { getBlock, type Room, type Floor } from "@/data/blocks";
+import roomDouble from "@/assets/room-double.jpg";
+import roomTriple from "@/assets/room-triple.jpg";
 
 export const Route = createFileRoute("/blocks/$slug")({
   loader: ({ params }) => {
@@ -38,6 +40,7 @@ function BlockPage() {
   const [reserved, setReserved] = useState<Set<string>>(new Set());
   const [activeRoom, setActiveRoom] = useState<Room | null>(null);
   const [openFloor, setOpenFloor] = useState<number>(1);
+  const [view360, setView360] = useState<{ title: string; image: string } | null>(null);
 
   const reservedCount = reserved.size;
   const memberLabel = reservedCount === 1 ? "member" : "members";
@@ -96,6 +99,49 @@ function BlockPage() {
             </div>
           </div>
         </section>
+
+        {/* 360° Room Views */}
+        {block.slug === "a" && (
+          <section className="pb-10">
+            <div className="mx-auto max-w-6xl px-5">
+              <div className="mb-5">
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary mb-2">Immersive preview</p>
+                <h2 className="font-display font-bold text-2xl sm:text-3xl">360° Room Views</h2>
+                <p className="text-sm text-muted-foreground mt-1.5 max-w-xl">Explore a full panoramic view of each sharing type before you reserve.</p>
+              </div>
+              <div className="grid sm:grid-cols-2 gap-4 sm:gap-5">
+                {[
+                  { title: "2 Sharing Room", subtitle: "Spacious twin layout", image: roomDouble },
+                  { title: "3 Sharing Room", subtitle: "Bright triple layout", image: roomTriple },
+                ].map((v) => (
+                  <article key={v.title} className="group relative rounded-3xl overflow-hidden border border-border bg-card shadow-card hover:shadow-float hover:-translate-y-0.5 transition-all">
+                    <div className="aspect-[16/10] overflow-hidden bg-muted">
+                      <img src={v.image} alt={`${v.title} 360 preview`} className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                      <span className="absolute top-3 left-3 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-background/90 backdrop-blur text-[11px] font-semibold uppercase tracking-wider">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>
+                        360°
+                      </span>
+                    </div>
+                    <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-5 text-white flex items-end justify-between gap-3">
+                      <div>
+                        <div className="font-display font-bold text-lg sm:text-xl leading-tight">{v.title}</div>
+                        <div className="text-xs opacity-85">{v.subtitle}</div>
+                      </div>
+                      <button
+                        onClick={() => setView360({ title: v.title, image: v.image })}
+                        className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-white text-foreground text-xs font-semibold hover:scale-105 transition-transform whitespace-nowrap"
+                      >
+                        Open 360 View
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg>
+                      </button>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* Floors */}
         <section className="pb-12">
@@ -176,6 +222,26 @@ function BlockPage() {
           }}
         />
       )}
+      {view360 && (
+        <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm grid place-items-center p-4 animate-pop-in" onClick={() => setView360(null)}>
+          <div onClick={(e) => e.stopPropagation()} className="relative w-full max-w-5xl rounded-3xl overflow-hidden bg-card shadow-float">
+            <button onClick={() => setView360(null)} aria-label="Close" className="absolute top-3 right-3 z-10 h-10 w-10 rounded-full bg-background/90 grid place-items-center hover:scale-105 transition-transform">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+            </button>
+            <div className="relative aspect-[16/10] bg-muted">
+              <img src={view360.image} alt={`${view360.title} 360 view`} className="absolute inset-0 h-full w-full object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 p-5 text-white">
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/15 backdrop-blur text-[11px] font-semibold uppercase tracking-wider mb-2">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>
+                  360° Panoramic Preview
+                </span>
+                <div className="font-display font-bold text-2xl sm:text-3xl">{view360.title}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -196,8 +262,17 @@ function RoomCard({ room, reserved, onReserve }: { room: Room; reserved: boolean
           <span className="text-[10px] px-2 py-0.5 rounded-full bg-sage/20 text-sage-foreground font-semibold whitespace-nowrap">{room.type}</span>
         </div>
 
-        <div className="mt-2 text-[11px] text-muted-foreground">
-          {reservedMembers} of {capacity} {memberWord} reserved
+        <div className="mt-2 flex items-center gap-1.5">
+          <span className={`h-1.5 w-1.5 rounded-full ${reserved ? "bg-muted-foreground" : "bg-sage"}`} />
+          <span className="text-[11px] font-medium text-muted-foreground">
+            {reserved ? "Reserved" : "Vacant"}
+            <span className="opacity-70"> · {reservedMembers}/{capacity} {memberWord}</span>
+          </span>
+        </div>
+
+        <div className="mt-2 font-display font-bold text-sm text-foreground">
+          ₹{room.rent.toLocaleString("en-IN")}
+          <span className="text-[10px] font-medium text-muted-foreground"> /year</span>
         </div>
 
         <button
