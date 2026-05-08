@@ -36,12 +36,16 @@ export type Block = {
 const PRICE_2 = 135000;
 const PRICE_3 = 135000;
 
-function buildFloors(prefix: string): Floor[] {
+// Per-floor sharing pattern (positions 1..9). "T" = 3-Sharing, "D" = 2-Sharing.
+const DEFAULT_PATTERN: ("T" | "D")[] = ["D", "T", "D", "T", "D", "T", "D", "T", "D"];
+const BLOCK_A_PATTERN: ("T" | "D")[] = ["T", "D", "D", "D", "T", "D", "T", "D", "T"];
+
+function buildFloors(prefix: string, pattern: ("T" | "D")[] = DEFAULT_PATTERN): Floor[] {
   return [1, 2, 3, 4, 5].map((floor) => ({
     number: floor,
-    rooms: Array.from({ length: 9 }).map((_, i) => {
+    rooms: pattern.map((p, i) => {
       const roomNum = floor * 100 + (i + 1);
-      const isTriple = i % 2 === 1; // alternate
+      const isTriple = p === "T";
       return {
         id: `${prefix}-${roomNum}`,
         name: `${prefix}${roomNum}`,
