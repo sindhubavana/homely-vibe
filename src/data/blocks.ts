@@ -72,7 +72,7 @@ export const blocks: Block[] = [
       { type: "2-Sharing", price: PRICE_2 },
       { type: "3-Sharing", price: PRICE_3 },
     ],
-    floors: buildFloors("A"),
+    floors: buildFloors("A", BLOCK_A_PATTERN),
   },
   {
     slug: "b",
