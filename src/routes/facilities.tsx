@@ -98,16 +98,7 @@ function FacilitiesPage() {
       <main className="flex-1">
         {/* Header */}
         <section className="mx-auto max-w-6xl w-full px-5 pt-16 pb-10 text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary mb-3">
-            What we offer
-          </p>
-          <h1 className="font-display font-bold text-4xl sm:text-5xl lg:text-6xl tracking-tight mb-4">
-            Our Facilities
-          </h1>
-          <p className="text-base sm:text-lg text-muted-foreground max-w-xl mx-auto">
-            Everything you need for comfortable living.
-          </p>
-          <div className="mt-6 mx-auto h-px w-16 bg-foreground/30" />
+          <div className="mx-auto h-px w-16 bg-foreground/30" />
         </section>
 
         {/* Weekly Food Menu */}
