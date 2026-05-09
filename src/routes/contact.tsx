@@ -12,10 +12,13 @@ export const Route = createFileRoute("/contact")({
   }),
 });
 
-const phones = [
-  { label: "Primary", number: "+91 94495 10381" },
-  { label: "Reception", number: "+91 94820 52116" },
-  { label: "Bookings", number: "+91 63634 73962" },
+const hostelOwners = [
+  { label: "Sanjay", number: "+91 63634 73962" },
+  { label: "Raghu", number: "+91 88616 60259" },
+];
+
+const facultyCoordinator = [
+  { label: "Harika", number: "+91 99163 77391" },
 ];
 
 function ContactPage() {
@@ -39,9 +42,18 @@ function ContactPage() {
           </div>
 
           <div className="rounded-3xl border border-border bg-card p-7 shadow-soft">
-            <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3">Call us</div>
+            <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3">Hostel Owners</div>
+            <ul className="space-y-2.5 mb-6">
+              {hostelOwners.map((p) => (
+                <li key={p.number} className="flex items-center justify-between gap-3">
+                  <span className="text-sm text-muted-foreground">{p.label}</span>
+                  <a className="font-medium hover:text-primary transition-colors" href={`tel:${p.number.replace(/\s/g, "")}`}>{p.number}</a>
+                </li>
+              ))}
+            </ul>
+            <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3">Faculty Coordinator</div>
             <ul className="space-y-2.5">
-              {phones.map((p) => (
+              {facultyCoordinator.map((p) => (
                 <li key={p.number} className="flex items-center justify-between gap-3">
                   <span className="text-sm text-muted-foreground">{p.label}</span>
                   <a className="font-medium hover:text-primary transition-colors" href={`tel:${p.number.replace(/\s/g, "")}`}>{p.number}</a>
