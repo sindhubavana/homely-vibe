@@ -14,11 +14,14 @@ export function SiteFooter() {
           <p className="text-sm leading-relaxed">Sri Saila Nilaya,<br/>opp. Sriram Sahana Apartment,<br/>Avalahalli, Yelahanka,<br/>Bangalore — 560064</p>
         </div>
         <div>
-          <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3">Call</div>
+          <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3">Hostel Owners</div>
+          <ul className="text-sm space-y-1 mb-4">
+            <li>Sanjay — <a className="hover:text-primary" href="tel:+916363473962">+91 63634 73962</a></li>
+            <li>Raghu — <a className="hover:text-primary" href="tel:+918861660259">+91 88616 60259</a></li>
+          </ul>
+          <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3">Faculty Coordinator</div>
           <ul className="text-sm space-y-1">
-            <li><a className="hover:text-primary" href="tel:+919449510381">+91 94495 10381</a></li>
-            <li><a className="hover:text-primary" href="tel:+919482052116">+91 94820 52116</a></li>
-            <li><a className="hover:text-primary" href="tel:+916363473962">+91 63634 73962</a></li>
+            <li>Harika — <a className="hover:text-primary" href="tel:+919916377391">+91 99163 77391</a></li>
           </ul>
         </div>
       </div>
