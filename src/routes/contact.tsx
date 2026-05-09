@@ -12,10 +12,13 @@ export const Route = createFileRoute("/contact")({
   }),
 });
 
-const phones = [
-  { label: "Primary", number: "+91 94495 10381" },
-  { label: "Reception", number: "+91 94820 52116" },
-  { label: "Bookings", number: "+91 63634 73962" },
+const hostelOwners = [
+  { label: "Sanjay", number: "+91 63634 73962" },
+  { label: "Raghu", number: "+91 88616 60259" },
+];
+
+const facultyCoordinator = [
+  { label: "Harika", number: "+91 99163 77391" },
 ];
 
 function ContactPage() {
