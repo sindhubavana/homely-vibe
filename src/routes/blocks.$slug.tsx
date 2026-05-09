@@ -115,7 +115,7 @@ function BlockPage() {
                     title: "2 Sharing Room",
                     subtitle: "Spacious twin layout",
                     image: roomDouble,
-                    panorama: "https://pannellum.org/images/alma.jpg",
+                    panorama: "https://res.cloudinary.com/dw5wcz7g2/image/upload/v1778171822/IMG-20260502-WA0046_1_lhunjf.jpg",
                   },
                   {
                     title: "3 Sharing Room",
